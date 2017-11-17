@@ -11,15 +11,21 @@ public class HeaderAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
+	//ユーザー名を格納
+	private String name;
+
 	LoginDTO loginDTO = new LoginDTO();
 
-	public String execute() {
-		// 結果を格納
-		String result = "ゲスト";
-		if(loginDTO.getLoginFlg() == true) {
-			result = loginDTO.getUserName();
+	public void setName(String name) {
+		// フラグfalseの場合nameにゲストを
+		if(loginDTO.getLoginFlg() == false) {
+			name = "ゲスト";
+		}else {
+			name = session.get("login_user_name").toString();
 		}
-		return result;
+	}
+	public String getName() {
+		return name;
 	}
 	public Map<String, Object> getsession() {
 		return this.session;

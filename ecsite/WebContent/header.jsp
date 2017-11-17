@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@
 		</div>
         <div id="headerlist">
             <div class="list-group">
-                <a href="#" class="list-group-item">こんにちは、ゲスト様</a>
+                <a href="#" class="list-group-item">こんにちは、<s:property value = "name" />様</a>
                 <a href="#" class="list-group-item">アカウント設定</a>
                 <a href="#" class="list-group-item">注文履歴</a>
                 <a href="#" class="list-group-item">カート</a>
