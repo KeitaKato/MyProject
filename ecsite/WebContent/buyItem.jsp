@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-
+	<%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="header.jsp" flush="true"/>
 <!DOCTYPE html>
 <html>
-<%@ include file="header.jsp"%>
+
 <head>
 	<title>BuyItem画面</title>
 	<style type="text/css">

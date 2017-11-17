@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +30,7 @@
 			color: black;
             line-height:40px;
 		}
-        
+
         #headerlist div{
             float:right;
             line-height:40px;
@@ -40,12 +40,9 @@
             float:left;
             padding-right: 20px;
             padding-left: 10px;
-            
+
         }
 	</style>
-    <script type="text/javascript">
-        function
-    </script>
 </head>
 <body>
 	<div id="header">
@@ -54,7 +51,14 @@
 		</div>
         <div id="headerlist">
             <div class="list-group">
-                <a href="#" class="list-group-item">こんにちは、<s:property value = "name" />様</a>
+                <a href="#" class="list-group-item">こんにちは、
+                <s:if test="#session.id != null">
+                <s:property value="session.user_Name"/>
+                </s:if>
+                <s:else>
+                	ゲスト
+                </s:else>
+				様</a>
                 <a href="#" class="list-group-item">アカウント設定</a>
                 <a href="#" class="list-group-item">注文履歴</a>
                 <a href="#" class="list-group-item">カート</a>
