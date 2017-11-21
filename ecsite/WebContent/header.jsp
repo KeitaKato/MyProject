@@ -53,7 +53,7 @@
             <div class="list-group">
                 <a href="#" class="list-group-item">こんにちは、
                 <s:if test="#session.id != null">
-                <s:property value="session.user_Name"/>
+                <s:property value="session.userName"/>
                 </s:if>
                 <s:else>
                 	ゲスト
