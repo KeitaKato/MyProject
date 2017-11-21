@@ -20,7 +20,7 @@
 	<style type="text/css">
 		#header {
 		    width: 100%;
-		    height: 40px;
+		    height: 70px;
 		    background-color: #fff;
 		}
 		#title {
@@ -28,42 +28,53 @@
             width: 200px;
             padding-left: 10px;
 			color: black;
-            line-height:40px;
 		}
 
-        #headerlist div{
+        #header_list div{
             float:right;
-            line-height:40px;
-            padding-left:20px;
+            padding:5px;
+            
         }
-        #headerlist div a{
+        #header_list div a{
             float:left;
-            padding-right: 20px;
-            padding-left: 10px;
-
+        }
+        #float_clear{float:clear;
+            width: 100%;
+            height: 50px;
+            background-color: black;
         }
 	</style>
 </head>
 <body>
 	<div id="header">
-	 	<div id="title">
-	 		<h1>ECサイト</h1>
-		</div>
-        <div id="headerlist">
-            <div class="list-group">
-                <a href="#" class="list-group-item">こんにちは、
-                <s:if test="#session.id != null">
-                <s:property value="session.userName"/>
-                </s:if>
-                <s:else>
-                	ゲスト
-                </s:else>
-				様</a>
-                <a href="#" class="list-group-item">アカウント設定</a>
-                <a href="#" class="list-group-item">注文履歴</a>
-                <a href="#" class="list-group-item">カート</a>
+        <div class="row">
+            <div class="col-md-4">
+                <div id="title">
+	 		        <h1>ECサイト</h1>
+		        </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <div id="header_list">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">こんにちは、
+                        <s:if test="#session.id != null">
+                            <b><s:property value="session.userName"/></b>
+                        </s:if>
+                        <s:else>
+                            <b>ゲスト</b>
+                        </s:else>
+				            様</a>
+                        <a href="#" class="list-group-item">アカウント設定</a>
+                        <a href="#" class="list-group-item">注文履歴</a>
+                        <a href="#" class="list-group-item">カート</a>
+                    </div>
+                </div>
             </div>
         </div>
 	</div>
+    <div id=float_clear>
+        </div>
 </body>
 </html>
