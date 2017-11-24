@@ -31,9 +31,7 @@
 		}
 
         #header_list div{
-            float:right;
-            padding:5px;
-            
+
         }
         #header_list div a{
             float:left;
@@ -46,18 +44,24 @@
 	</style>
 </head>
 <body>
-	<div id="header">
-        <div class="row">
-            <div class="col-md-4">
-                <div id="title">
+	<div id="header" class="row">
+            <div id="title" class="col-md-4">
 	 		        <h1>ECサイト</h1>
-		        </div>
             </div>
-            <div class="col-md-4">
+            <div id="search_window" class="col-md-4">
+            		<div class="input-group">
+            			<input type="text" class="form-control">
+            			<span class="input-group-btn">
+            				<button class="btn btn-default" type="submit">検索
+            					<i class='glyphicon glyphicon-search'></i>
+            				</button>
+            			</span>
+            		</div>
             </div>
-            <div class="col-md-4">
-                <div id="header_list">
+            <div id="header_list" class="col-md-4">
+                    <div class="pull-right">
                     <div class="list-group">
+                        <div class="pull-left">
                         <a href="#" class="list-group-item">こんにちは、
                         <s:if test="#session.id != null">
                             <b><s:property value="session.userName"/></b>
@@ -69,10 +73,11 @@
                         <a href="#" class="list-group-item">アカウント設定</a>
                         <a href="#" class="list-group-item">注文履歴</a>
                         <a href="#" class="list-group-item">カート</a>
+                        </div>
                     </div>
-                </div>
+                    </div>
+                
             </div>
-        </div>
 	</div>
     <div id=float_clear>
         </div>
