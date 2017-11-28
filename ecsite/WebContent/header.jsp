@@ -19,6 +19,12 @@
 	<script src="js/bootstrap.min.js"></script>
 	<style type="text/css">
 		#header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+            flex-wrap: wrap;
+		    width: 100%;
+		    background-color: #fff;
 		}
 		#title {
             float: left;
@@ -27,54 +33,69 @@
 			color: black;
 		}
 
+		#search_window{
+			margin-top: 1px;
+			margin-right: 5px;
+           	width:  500px;
+		}
+
         #header_list div{
+        	display: flex;
+        	margin-top: 1px;
+            margin-right: auto;
+            margin-bottom: 1px;
 
         }
         #header_list div a{
-            float:left;
+            width: 125px;
+            text-align: center;
         }
-        #float_clear{float:clear;
+        #float_clear{
             width: 100%;
-            height: 50px;
+            height: 60px;
             background-color: black;
         }
 	</style>
 </head>
 <body>
-	<div id="header" class="row">
-            <div id="title" class="col-md-3">
+	<div id="header" >
+
+
+            	<div  id="title">
 	 		        <h1>ECサイト</h1>
+
             </div>
-            <div id="search_window" class="col-md-4">
+
+
+            	<s:form action="SearchAction" id="search_window">
             		<div class="input-group">
-            			<input type="text" class="form-control">
+            			<input type="text" name="searchValue" class="form-control">
             			<span class="input-group-btn">
-            				<button class="btn btn-default" type="submit">検索
+            				<button class="btn btn-default" type="submit" value="検索">検索
             					<i class='glyphicon glyphicon-search'></i>
             				</button>
             			</span>
             		</div>
-            </div>
-            <div id="header_list" class="col-md-5">
-                    <div class="pull-right">
-                    <div class="list-group">
-                        <div class="pull-left">
+            	</s:form>
+
+
+            	<div  id="header_list">
+                    <div id="account_menu" class="list-group">
                         <a href="#" class="list-group-item">こんにちは、
                         <s:if test="#session.id != null">
-                            <b><s:property value="session.userName"/></b>
+                            <br><b><s:property value="session.userName"/></b>
                         </s:if>
                         <s:else>
-                            <b>ゲスト</b>
+                            <br><b>ゲスト</b>
                         </s:else>
 				            様</a>
                         <a href="#" class="list-group-item">アカウント設定</a>
                         <a href="#" class="list-group-item">注文履歴</a>
                         <a href="#" class="list-group-item">カート</a>
-                        </div>
                     </div>
-                    </div>
+                </div>
 
-            </div>
+
 	</div>
     <div id=float_clear>
         </div>
