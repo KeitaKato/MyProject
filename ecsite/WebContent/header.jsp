@@ -19,9 +19,6 @@
 	<script src="js/bootstrap.min.js"></script>
 	<style type="text/css">
 		#header {
-		    width: 100%;
-		    height: 70px;
-		    background-color: #fff;
 		}
 		#title {
             float: left;
@@ -45,7 +42,7 @@
 </head>
 <body>
 	<div id="header" class="row">
-            <div id="title" class="col-md-4">
+            <div id="title" class="col-md-3">
 	 		        <h1>ECサイト</h1>
             </div>
             <div id="search_window" class="col-md-4">
@@ -58,7 +55,7 @@
             			</span>
             		</div>
             </div>
-            <div id="header_list" class="col-md-4">
+            <div id="header_list" class="col-md-5">
                     <div class="pull-right">
                     <div class="list-group">
                         <div class="pull-left">
@@ -76,7 +73,7 @@
                         </div>
                     </div>
                     </div>
-                
+
             </div>
 	</div>
     <div id=float_clear>
