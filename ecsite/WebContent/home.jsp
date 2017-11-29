@@ -5,65 +5,51 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="sidemenu.jsp" %>
 <head>
 	<title>Home画面</title>
-	<style type="text/css">
-		body {
-		   margin:0;
-		   padding:0;
-		   line-height:1.6;
-		   letter-spacing:1px;
-		   font-family:Verdana, Helvetica, sans-serif;
-		   font-size:12px;
-		   color:#333;
-		   background:#fff;
-		}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
-		table {
-			text-align:center;
-			margin:0 auto;
-		}
+    <script>
+      $(document).ready(function(){
+        $('.slider').bxSlider({
+            auto: true,
+            mode: 'fade',
+            speed: 1000,
+            infiniteLoop: true,
+            pager: false
 
-		/* ========TEMPLATE LAYOUT======== */
-		#top {
-		   width:780px;
-		   margin:30px auto;
-		   border:1px solid #333;
-		}
+        });
+      });
+    </script>
 
-		#main {
-		   width: 100%;
-		   height: 500px;
-		   text-align: center;
-		}
-
-		#footer {
-			width: 100%;
-			height: 80px;
-			background-color: black;
-			clear:both;
-		}
-
-		#text-center {
-			display: inline-block;
-			text-align: center;
-		}
-	</style>
 </head>
 <body>
+    <div id="top-slider">
+        <div class="slider">
+            <div><img src="picture/bxSlider/ELF85_IMG_0836_TP_V.jpg"></div>
+            <div><img src="picture/bxSlider/PPP_cyuukaman_TP_V.jpg"></div>
+            <div><img src="picture/bxSlider/stockhiroDSCF5504_TP_V.jpg"></div>
+            <div><img src="picture/bxSlider/tachiaraiIMGL4582_TP_V.jpg"></div>
+            <div><img src="picture/bxSlider/YAMA_DSC0728_TP_V.jpg"></div>
+        </div>
+   </div>
 	<div id="main">
-		<div id="top">
-			<p>Home</p>
+		<div id="main-center">
+			<div id="text-center">
+				<s:form action="HomeAction">
+					<s:submit value="商品購入"/>
+				</s:form>
+				<s:if test="#session.id != null">
+					<p>ログアウトする場合は<a href='<s:url action="LogoutAction" />'>こちら</a></p>
+				</s:if>
+			</div>
 		</div>
-
-		<div id="text-center">
-			<s:form action="HomeAction">
-				<s:submit value="商品購入"/>
-			</s:form>
-			<s:if test="#session.id != null">
-				<p>ログアウトする場合は<a href='<s:url action="LogoutAction" />'>こちら</a></p>
-			</s:if>
+		<div id="left">
+            <%@ include file="sidemenu.jsp"%>
+		</div>
+		<div id="right">
 		</div>
 	</div>
 	<div id="footer">
