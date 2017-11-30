@@ -4,7 +4,7 @@
 <%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
-
+<%@ include file="headerMenubar.jsp" %>
 <head>
 	<title>BuyItem画面</title>
 </head>

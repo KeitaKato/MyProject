@@ -39,5 +39,15 @@ delete_date datetime
 );
 
 
-INSERT INTO item_info_transaction(item_name, item_price, item_stock) VALUES("ノートBook", 100, 50);
+INSERT INTO item_info_transaction(item_name, item_price, item_stock) VALUES
+("トマト", 100, 50),
+("ニンジン",98,50),
+("ホウレンソウ",98,50),
+("ブロッコリー",100,50),
+("豚肉500g",680,20),
+("魚",198,20),
+("ジュース",150,100),
+("マヨネーズ",198,100),
+("冷凍スパゲティ",298,20),
+("ハム",138,60);
 INSERT INTO login_user_transaction(login_id, login_pass, user_name) VALUES("internous", "internous01", "test");

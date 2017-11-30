@@ -27,10 +27,11 @@
 		    width: 100%;
 		    background-color: #fff;
 		}
-		#title {
-            float: left;
+		#title a{
+			display: block;
             width: 200px;
             padding-left: 10px;
+            font-size: 30px;
 			color: black;
 		}
 
@@ -45,25 +46,27 @@
         	margin-top: 1px;
             margin-right: auto;
             margin-bottom: 1px;
-
         }
         #header_list div a{
             width: 125px;
             text-align: center;
         }
-        #float_clear{
-            width: 100%;
-            height: 60px;
-            background-color: black;
-        }
+
 	</style>
+    <script type="text/javascript">
+        $(window).on('scroll',function() {
+            $('#header').toggleClass('fixed',$(this).scrollTop() > 120);
+    });
+    </script>
 </head>
 <body>
 	<div id="header" >
 
 
-            	<div  id="title">
-	 		        <h1>ECサイト</h1>
+            <div  id="title">
+            	<a href="home.jsp">
+	 		        ECサイト
+	 		    </a>
 
             </div>
 
@@ -98,7 +101,7 @@
 
 
 	</div>
-    <div id=float_clear>
-        </div>
+    
+    
 </body>
 </html>

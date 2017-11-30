@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html>
-
+<%@ include file="headerMenubar.jsp" %>
 <head>
 	<title>Login画面</title>
 </head>

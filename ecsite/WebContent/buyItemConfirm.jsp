@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-
+<%@ include file="headerMenubar.jsp" %>
 <head>
 	<title>BuyItemConfirm画面</title>
 	<script type="text/javascript">

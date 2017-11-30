@@ -14,40 +14,8 @@ body {
 			text-align:center;
 			margin:0 auto;
 		}
-        #top-slider{
-            width: 80%;
-            margin: 0px auto;
-            margin-top 0 ;
-            margin-bottom: 10px;
-            display:block;
-        }
-/* ===========BXSLIDER========== */
-        .slider{
-            width: 80%;
-            height: 300px;
-        }
-        .slider img{
-            width: 96%;
-            height: 350px;
-            margin: 0 auto;
-            display:block;
 
-        }
-    <!--
-    .bx-wrapper{ margin: 0 auto !important;}
-    ul.bxslider {
-        margin:0;
-        padding:0;
-    }
-    .bx-wrapper .bx-viewport{
-    -moz-box-shadow: 0 0 0 ;
-    -webkit-box-shadow: 0 0 0 ;
-    box-shadow: 0 0 0 ;
-    border: 0;
-    left: 0;
-    background: #fff;
-    }
-    -->
+
 /* ==========SIDEMUNU========== */
 #sidemunu div{
     margin: 0 auto;
@@ -70,24 +38,25 @@ body {
 
 #main {
     width: 100%;
-    height: 500px;
     text-align: center;
     display: flex;
+    justify-content: center;
 	}
-#main-center{order: 2;
+#main-center{
     width: 90%;
     height: 90%;
+    margin-bottom: 10px;
+    margin-left: 20px;
     margin-right: 20px;
     background-color: floralwhite;
 
 
 }
-#left{order: 1;
+#left{order: 0;
     width: 20%;
     height: 90%;
     margin-left:20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-top: 5px;
     background-color: lightgray;
 }
