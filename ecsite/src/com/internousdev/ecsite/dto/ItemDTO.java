@@ -1,12 +1,16 @@
 package com.internousdev.ecsite.dto;
 
-public class ItemLineupDTO {
+public class ItemDTO {
 
 	private int id;
 
 	private String itemName;
 
 	private String itemPrice;
+
+	private String itemCategory;
+
+	private String itemImg;
 
 	public String getItemName() {
 		return itemName;
@@ -32,4 +36,20 @@ public class ItemLineupDTO {
 		this.id = id;
 	}
 
+	public String getItemCategory() {
+		return itemCategory;
+	}
+
+	public void setItemCategory(String itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+
+	public String getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+
+	}
 }

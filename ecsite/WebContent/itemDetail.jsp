@@ -4,59 +4,10 @@
     <%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
-<%@ include file="headerMenubar.jsp" %>
 <head>
-<title>全商品一覧</title>
-    <style type=text/css>
-        /* ===========ITEMLIST========== */
-
-#item_list{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-flow:row wrap;
-    justify-content: flex-start;
-    align-items:flex-start;
-    align-content: flex-start;
-    padding: 0px 15px 0px;
-}
-
-
-#item_list #item_box{
-    flex-basis: 200px;
-    height: 380px;
-    margin: 20px 15px 0px;
-    background-color:darkkhaki;
-}
-        
-#item_list #item_box #item_img img{
-	width:200px;
-	height:200px;
-    margin-bottom: 5px;
-}
-#item_list #item_box #item_category{
-    margin: 5px 0px;
-}
-        
-#item_list #item_box #item_name{
-    margin: 5px 0px;
-    font-size: 20px;
-}
-        
-#item_list #item_box #item_price{
-    margin: 5px 0px;
-    color:red;
-    font-size: 20px;
-}
-        span{
-            font-size: 15px;
-        }
-
-    </style>
+<%@ include file="headerMenubar.jsp" %>
 </head>
 <body>
-<div id="top">
-</div>
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">

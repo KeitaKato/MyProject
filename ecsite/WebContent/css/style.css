@@ -10,10 +10,10 @@ body {
 		   background:#fff;
 		}
 
-		table {
-			text-align:center;
-			margin:0 auto;
-		}
+table {
+    text-align:center;
+    margin:0 auto;
+}
 
 
 /* ==========SIDEMUNU========== */
@@ -42,7 +42,7 @@ body {
     display: flex;
     justify-content: center;
 	}
-#main-center{
+#main-center{order: 2;
     width: 90%;
     height: 90%;
     margin-bottom: 10px;
@@ -52,7 +52,7 @@ body {
 
 
 }
-#left{order: 0;
+#left{order: 1;
     width: 20%;
     height: 90%;
     margin-left:20px;

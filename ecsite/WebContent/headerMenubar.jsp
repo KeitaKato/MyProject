@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="s" uri="/struts-tags" %>
 <head>
 <style type="text/css">
 /* ==========HEADERMENU=========== */
@@ -37,7 +38,7 @@
 <body>
 <div id=headerMenu>
 <ul id="Menu">
-	<li><a href="#">食品</a>
+	<li><s:a action="ItemLineupAction">全商品一覧</s:a>
 	<li><a href="#">飲料</a>
 	<li><a href="#">調味料</a>
 	<li><a href="#">冷凍</a>

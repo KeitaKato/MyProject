@@ -7,33 +7,35 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.internousdev.ecsite.dto.ItemLineupDTO;
+import com.internousdev.ecsite.dto.ItemDTO;
 import com.internousdev.ecsite.util.DBConnector;
 
-public class ItemLineupDAO {
+public class ItemDAO {
 
-	List<ItemLineupDTO> ItemList = new ArrayList<ItemLineupDTO>();
+	List<ItemDTO> itemList = new ArrayList<>();
 
 
-	public List<ItemLineupDTO> select() {
+	public List<ItemDTO> getItemDAOInfo() {
 
 
 		DBConnector dbconnector = new DBConnector();
 		Connection connection = dbconnector.getConnection();
 
-		String sql = "SELECT id, item_name, item_price FROM item_info_trandaction";
+		String sql = "SELECT id, item_name, item_price, item_category, item_img FROM item_info_transaction";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 
 			while(resultSet.next()) {
-				ItemLineupDTO dto = new ItemLineupDTO();
+				ItemDTO dto = new ItemDTO();
 
 				dto.setId(resultSet.getInt("id"));
 				dto.setItemName(resultSet.getString("Item_name"));
 				dto.setItemPrice(resultSet.getString("item_price"));
-				ItemList.add(dto);
+				dto.setItemCategory(resultSet.getString("item_category"));
+				dto.setItemImg(resultSet.getString("item_img"));
+				itemList.add(dto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,7 +45,7 @@ public class ItemLineupDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ItemList;
+		return itemList;
 	}
 
 }
