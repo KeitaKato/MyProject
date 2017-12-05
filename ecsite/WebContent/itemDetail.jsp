@@ -11,7 +11,7 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
-            <s:iterator value="ItemList">
+            <s:form value="ItemList">
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
@@ -28,7 +28,7 @@
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
 			     </div>
-            </s:iterator>
+            </s:form>
 		</div>
 	</div>
 	<div id="left">

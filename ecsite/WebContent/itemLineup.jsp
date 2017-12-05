@@ -11,11 +11,9 @@
         /* ===========ITEMLIST========== */
 
 #item_list{
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-flow:row wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items:flex-start;
     align-content: flex-start;
     padding: 0px 15px 0px;
@@ -28,7 +26,7 @@
     margin: 20px 15px 0px;
     background-color:darkkhaki;
 }
-        
+
 #item_list #item_box #item_img img{
 	width:200px;
 	height:200px;
@@ -37,12 +35,12 @@
 #item_list #item_box #item_category{
     margin: 5px 0px;
 }
-        
+
 #item_list #item_box #item_name{
     margin: 5px 0px;
     font-size: 20px;
 }
-        
+
 #item_list #item_box #item_price{
     margin: 5px 0px;
     color:red;
@@ -60,7 +58,7 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
-            <s:iterator value="ItemList">
+            <s:iterator value="itemList">
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>

@@ -12,7 +12,7 @@ import com.internousdev.ecsite.util.DBConnector;
 
 public class ItemDAO {
 
-	List<ItemDTO> itemList = new ArrayList<>();
+	public List<ItemDTO> itemList = new ArrayList<>();
 
 
 	public List<ItemDTO> getItemDAOInfo() {

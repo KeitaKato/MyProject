@@ -40,25 +40,24 @@ table {
     width: 100%;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: left;
 	}
-#main-center{order: 2;
-    width: 90%;
-    height: 90%;
+#main-center{order: 2;;
     margin-bottom: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding-right: 0px;
     background-color: floralwhite;
+    flex-grow: 4;
 
 
 }
 #left{order: 1;
-    width: 20%;
+    max-width: 165px;
     height: 90%;
-    margin-left:20px;
+    margin-left:35px;
     margin-bottom: 10px;
     padding-top: 5px;
     background-color: lightgray;
+    flex-shrink: 0;
 }
 
 #footer {

@@ -22,11 +22,11 @@
         }
         .slider{
             width: 80%;
-            height: 300px;
+            height: 200px;
         }
         .slider img{
             width: 96%;
-            height: 350px;
+            height: 200px;
             margin: 0 auto;
             display:block;
 
