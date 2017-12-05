@@ -67,7 +67,7 @@
                         <s:property value="itemCategory"/>
                     </div>
 					<div id="item_name">
-						<a href='<s:url action="HomeAction"><s:param name="id" value="id" /></s:url>'>
+						<a href='<s:url action="ItemDetailAction"><s:param name="id" value="id" /></s:url>'>
 							<s:property value="itemName" />
 						</a>
 					</div>

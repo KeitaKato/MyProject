@@ -14,19 +14,41 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta charset="utf-8">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+        $(window).on('scroll',function() {
+            $('#header').toggleClass('fixed',$(this).scrollTop() > 125);
+    });
+    </script>
+    
 	<style type="text/css">
 		#header {
+		    width: 100%;
+            height: 70px;
+            background-color: #f0f0f0;
+		}
+        #header #fixheader{
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
             flex-wrap: wrap;
-		    width: 100%;
-		    background-color: #fff;
+			position: absolute;
+            background-color: #f0f0f0;
+			width: 100%;
+			top: 0px;
+            z-index: 1;
+        }
+		#header.fixed #fixheader{
+			position: fixed;
+			top: 0px;
+            z-index: 1;
 		}
+
 		#title a{
 			display: block;
             width: 200px;
@@ -53,16 +75,10 @@
         }
 
 	</style>
-    <script type="text/javascript">
-        $(window).on('scroll',function() {
-            $('#header').toggleClass('fixed',$(this).scrollTop() > 120);
-    });
-    </script>
 </head>
 <body>
-	<div id="header" >
-
-
+    <div id="header">
+        <div id="fixheader">
             <div  id="title">
             	<a href="home.jsp">
 	 		        ECサイト
@@ -97,11 +113,8 @@
                         <a href="#" class="list-group-item">注文履歴</a>
                         <a href="#" class="list-group-item">カート</a>
                     </div>
-                </div>
-
-
-	</div>
-    
-    
+            </div>
+            </div>
+</div>
 </body>
 </html>

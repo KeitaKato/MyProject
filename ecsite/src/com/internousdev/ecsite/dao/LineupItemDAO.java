@@ -10,12 +10,12 @@ import java.util.List;
 import com.internousdev.ecsite.dto.ItemDTO;
 import com.internousdev.ecsite.util.DBConnector;
 
-public class ItemDAO {
+public class LineupItemDAO {
 
 	public List<ItemDTO> itemList = new ArrayList<>();
 
 
-	public List<ItemDTO> getItemDAOInfo() {
+	public List<ItemDTO> getItemLineupDAOInfo() {
 
 
 		DBConnector dbconnector = new DBConnector();
@@ -31,7 +31,7 @@ public class ItemDAO {
 				ItemDTO dto = new ItemDTO();
 
 				dto.setId(resultSet.getInt("id"));
-				dto.setItemName(resultSet.getString("Item_name"));
+				dto.setItemName(resultSet.getString("item_name"));
 				dto.setItemPrice(resultSet.getString("item_price"));
 				dto.setItemCategory(resultSet.getString("item_category"));
 				dto.setItemImg(resultSet.getString("item_img"));

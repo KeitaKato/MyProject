@@ -7,22 +7,22 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ecsite.dao.ItemDAO;
+import com.internousdev.ecsite.dao.LineupItemDAO;
 import com.internousdev.ecsite.dto.ItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ItemLineupAction extends ActionSupport implements SessionAware{
+public class LineupItemAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
-	private ItemDAO dao = new ItemDAO();
+	private LineupItemDAO dao = new LineupItemDAO();
 
 	public List<ItemDTO> itemList = new ArrayList<>();
 
 
 	public String execute() throws SQLException{
 
-	itemList = dao.getItemDAOInfo();
+	itemList = dao.getItemLineupDAOInfo();
 		return SUCCESS;
 
 	}
