@@ -72,13 +72,13 @@
 		</action>
 
 		<!--  ItemLineupAction -->
-		<action name="ItemLineupAction" class="com.internousdev.ecsite.action.ItemLineupAction" method="execute">
-			<result name="success">itemLineup.jsp</result>
+		<action name="LineupItemAction" class="com.internousdev.ecsite.action.LineupItemAction" method="execute">
+			<result name="success">LineupItem.jsp</result>
 		</action>
 
 		<!--  ItemDetailAction -->
-		<action name="ItemDetailAction" class="com.internousdev.ecsite.action.ItemDetailAction" method="execute">
-			<result name="success">itemDetail.jsp</result>
+		<action name="DetailItemAction" class="com.internousdev.ecsite.action.DetailItemAction" method="execute">
+			<result name="success">DetailItem.jsp</result>
 		</action>
 
 		<!-- CartItemAction -->
