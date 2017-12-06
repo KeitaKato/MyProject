@@ -13,7 +13,7 @@
 			<p>BuyItem</p>
 		</div>
 	<div id="main">
-		
+
 		<div id="main-center">
 		<s:form action="BuyItemAction">
 			<table>
@@ -22,7 +22,7 @@
 						<span>商品名</span>
 					</td>
 					<td>
-						<s:property value="session.buyItem_name" /><br>
+						<s:property value="session.item_name" /><br>
 					</td>
 				</tr>
 				<tr>
@@ -30,7 +30,7 @@
 						<span>値段</span>
 					</td>
 					<td>
-						<s:property value="session.buyItem_price" /><span>円</span>
+						<s:property value="session.item_price" /><span>円</span>
 					</td>
 				</tr>
 				<tr>

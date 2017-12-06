@@ -102,7 +102,7 @@ function buttonAction(){
                 <s:form id="item_cart" action="CartItemAction">
                     <div id="purchase_count">
                         <span>数量</span>
-                        <select name="count">
+                        <select name="buyCount">
                             <option value="1" selected="selected">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

@@ -12,6 +12,10 @@ public class ItemDTO {
 
 	private String itemImg;
 
+	private int buyConut;
+
+	private int totalPrice;
+
 	public String getItemName() {
 		return itemName;
 	}
@@ -51,5 +55,21 @@ public class ItemDTO {
 	public void setItemImg(String itemImg) {
 		this.itemImg = itemImg;
 
+	}
+
+	public int getBuyConut() {
+		return buyConut;
+	}
+
+	public void setBuyConut(int buyConut) {
+		this.buyConut = buyConut;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }
