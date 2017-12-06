@@ -10,7 +10,8 @@
 
 <script type="text/javascript">
 function buttonAction(){
-    document.ansform.action="CartItemAction";
+	var target = document.getElementById("item_cart");
+	target.submit();
 }
 </script>
 
@@ -119,6 +120,8 @@ function buttonAction(){
                         カートに入れる">カートに入れる
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </button>
+                        <input type="hidden" value='<s:property value="id"/>'
+                        name="id"/>
                 </s:form>
         </div>
         </div>

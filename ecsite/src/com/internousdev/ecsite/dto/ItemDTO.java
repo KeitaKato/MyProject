@@ -72,4 +72,5 @@ public class ItemDTO {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
 }
