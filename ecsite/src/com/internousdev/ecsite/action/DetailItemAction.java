@@ -17,7 +17,7 @@ public class DetailItemAction extends ActionSupport implements SessionAware{
 
 	private String itemName;
 
-	private String itemPrice;
+	private int itemPrice;
 
 	private String itemCategory;
 
@@ -62,11 +62,11 @@ public class DetailItemAction extends ActionSupport implements SessionAware{
 		this.itemName = itemName;
 	}
 
-	public String getItemPrice() {
+	public int getItemPrice() {
 		return itemPrice;
 	}
 
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 

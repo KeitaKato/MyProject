@@ -31,7 +31,7 @@ public class BuyItemDAO {
 			if(resultSet.next()) {
 				itemDTO.setId(resultSet.getInt("id"));
 				itemDTO.setItemName(resultSet.getString("item_name"));
-				itemDTO.setItemPrice(resultSet.getString("item_price"));
+				itemDTO.setItemPrice(resultSet.getInt("item_price"));
 			}
 
 		} catch(Exception e) {

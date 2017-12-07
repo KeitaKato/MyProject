@@ -32,7 +32,7 @@ public class LineupItemDAO {
 
 				dto.setId(resultSet.getInt("id"));
 				dto.setItemName(resultSet.getString("item_name"));
-				dto.setItemPrice(resultSet.getString("item_price"));
+				dto.setItemPrice(resultSet.getInt("item_price"));
 				dto.setItemCategory(resultSet.getString("item_category"));
 				dto.setItemImg(resultSet.getString("item_img"));
 				itemList.add(dto);

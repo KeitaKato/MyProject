@@ -12,11 +12,21 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CartItemAction extends ActionSupport implements SessionAware{
 
-	public int id;
+	private int id;
 
-	public int buyCount;
+	private int buyCount;
 
-	public int total_price;
+	private int total_price;
+
+	private String itemImg;
+
+	private String itemCategory;
+
+	private String itemName;
+
+	private int itemPrice;
+
+	private String cartResult;
 
 	public Map<String, Object> session;
 
@@ -29,12 +39,11 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 	public String execute() {
 		String result = SUCCESS;
 
+		total_price = buyCount * itemPrice;
+
 		cartItemDAO.CartPlus(id, total_price, buyCount, (String)session.get("login_user_id"));
 
-		int intCount = Integer.parseInt(session.get("count").toString());
-		int intPrice = Integer.parseInt(session.get("item_price").toString());
-
-		session.put("total_price", intCount * intPrice);
+		cartResult = cartItemDAO.getCartResult();
 
 		return result;
 	}
@@ -55,6 +64,46 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
+	}
+
+	public String getCartResult() {
+		return cartResult;
+	}
+
+	public void setCartResult(String cartResult) {
+		this.cartResult = cartResult;
+	}
+
+	public String getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+	}
+
+	public String getItemCategory() {
+		return itemCategory;
+	}
+
+	public void setItemCategory(String itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public int getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 
 }

@@ -120,8 +120,11 @@ function buttonAction(){
                         カートに入れる">カートに入れる
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </button>
-                        <input type="hidden" value='<s:property value="id"/>'
-                        name="id"/>
+                        <input type="hidden" value='<s:property value="id"/>' name="id"/>
+                        <input type="hidden" value='<s:property value="item_img"/>' name="itemImg"/>
+                        <input type="hidden" value='<s:property value="item_catecory"/>' name="itemCatecory"/>
+                        <input type="hidden" value='<s:property value="item_name"/>' name="itemName"/>
+                        <input type="hidden" value='<s:property value="item_price"/>' name="itemPrice"/>
                 </s:form>
         </div>
         </div>

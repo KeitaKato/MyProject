@@ -16,6 +16,8 @@ public class CartItemDAO {
 
 	private ItemDTO itemDTO = new ItemDTO();
 
+	private String cartResult;
+
 
 	public ItemDTO getCartItemInfo(int id) {
 
@@ -30,7 +32,7 @@ public class CartItemDAO {
 			if(resultSet.next()) {
 				itemDTO.setId(resultSet.getInt("id"));
 				itemDTO.setItemName(resultSet.getString("item_name"));
-				itemDTO.setItemPrice(resultSet.getString("item_price"));
+				itemDTO.setItemPrice(resultSet.getInt("item_price"));
 				itemDTO.setItemCategory(resultSet.getString("item_category"));
 				itemDTO.setItemImg(resultSet.getString("item_img"));
 			}
@@ -47,18 +49,48 @@ public class CartItemDAO {
 
 	public void CartPlus(int id,int total_price, int count, String userId) {
 
-		String selectSql = "SELECT item_transaction_id, user_master_id from user_buy_item_transaction WEHRE item_transaction_id=? AND user_master_id=?";
+		this.setCartResult("商品を追加できませんでした。");
+
+		String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?";
+		String selectSql = "SELECT * FROM user_buy_item_transaction WEHRE item_transaction_id=? AND user_master_id=?";
 		String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,toral_price,total_count,user_master_id) VALES(?,?,?,?)";
-		String updateSql = "UPDATE user_buy_item_transaction SET item_transaction_id=?, user_master_id=? WHERE item_transaction_id=? AND user_master_id)";
+		String updateSql = "UPDATE user_buy_item_transaction SET total_count=? WHERE item_transaction_id=? AND user_master_id)";
 
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
-			preparedStatement.setInt(1, id);
-			preparedStatement.setInt(2,total_price );
-			preparedStatement.setInt(3,count);
-			preparedStatement.setString(4,userId);
+			PreparedStatement itemStockPreparedStatement = connection.prepareStatement(itemStockSql);
+			itemStockPreparedStatement.setInt(1, id);
+			ResultSet itemStockResult = itemStockPreparedStatement.executeQuery();
 
-			preparedStatement.executeUpdate();
+			if(itemStockResult.next() && itemStockResult.getInt("item_stock") >= count) {
+				PreparedStatement selectPreparedStatement = connection.prepareStatement(selectSql);
+				selectPreparedStatement.setInt(1, id);
+				selectPreparedStatement.setString(2, userId);
+				ResultSet resultSet = selectPreparedStatement.executeQuery();
+
+				if(resultSet.next()) {
+					PreparedStatement updatePrepareStatement = connection.prepareStatement(updateSql);
+					updatePrepareStatement.setInt(1, resultSet.getInt("total_count") + count);
+					updatePrepareStatement.setInt(2, id);
+					updatePrepareStatement.setString(3, userId);
+
+					updatePrepareStatement.executeUpdate();
+
+				}else {
+					PreparedStatement insertPreparedStatement = connection.prepareStatement(insertSql);
+					insertPreparedStatement.setInt(1, id);
+					insertPreparedStatement.setInt(2,total_price );
+					insertPreparedStatement.setInt(3,count);
+					insertPreparedStatement.setString(4,userId);
+
+					insertPreparedStatement.executeUpdate();
+
+				}
+				this.setCartResult("商品をカートに追加しました。");
+
+			}else {
+				this.setCartResult("在庫数を超えていたため追加できませんでした。");
+			}
+
 		} catch(SQLException e){
 			e.printStackTrace();
 
@@ -69,5 +101,13 @@ public class CartItemDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	public String getCartResult() {
+		return cartResult;
+	}
+
+	public void setCartResult(String cartResult) {
+		this.cartResult = cartResult;
 	}
 }

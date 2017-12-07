@@ -29,7 +29,7 @@ public class DateilItemDAO {
 			if(resultSet.next()) {
 				itemDTO.setId(resultSet.getInt("id"));
 				itemDTO.setItemName(resultSet.getString("item_name"));
-				itemDTO.setItemPrice(resultSet.getString("item_price"));
+				itemDTO.setItemPrice(resultSet.getInt("item_price"));
 				itemDTO.setItemCategory(resultSet.getString("item_category"));
 				itemDTO.setItemImg(resultSet.getString("item_img"));
 			}
