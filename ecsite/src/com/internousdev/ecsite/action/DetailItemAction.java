@@ -32,10 +32,14 @@ public class DetailItemAction extends ActionSupport implements SessionAware{
 	public String execute() throws SQLException{
 		itemDTO = itemDAO.getItemDateilInfo(id);
 
+		this.id = itemDTO.getId();
 		this.itemName = itemDTO.getItemName();
 		this.itemPrice = itemDTO.getItemPrice();
 		this.itemCategory = itemDTO.getItemCategory();
 		this.itemImg = itemDTO.getItemImg();
+
+		session.put("itemDTO", itemDTO);
+		session.put("id", id);
 
 		return SUCCESS;
 	}

@@ -7,45 +7,42 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ecsite.dao.CartItemDAO;
-import com.internousdev.ecsite.dto.ItemDTO;
+import com.internousdev.ecsite.dto.CartItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartItemAction extends ActionSupport implements SessionAware{
 
-	private int id;
-
-	private int buyCount;
-
-	private int total_price;
-
-	private String itemImg;
-
-	private String itemCategory;
-
-	private String itemName;
-
-	private int itemPrice;
+	public int buyCount;
 
 	private String cartResult;
 
 	public Map<String, Object> session;
 
-	ItemDTO itemDTO = new ItemDTO();
+	private int totalPrice;
+
+	CartItemDTO cartItemDTO = new CartItemDTO();
 
 	CartItemDAO cartItemDAO = new CartItemDAO();
 
-	public List<ItemDTO> itemList = new ArrayList<>();
+	public List<CartItemDTO> cartItemList = new ArrayList<>();
 
 	public String execute() {
 		String result = SUCCESS;
 
-		total_price = buyCount * itemPrice;
+		if(session.containsKey("login_user_id")) {
+			int id = (int) session.get("id");
+			cartItemDAO.CartPlus(id, buyCount, session.get("login_user_id").toString());
 
-		cartItemDAO.CartPlus(id, total_price, buyCount, (String)session.get("login_user_id"));
+			cartResult = cartItemDAO.getCartResult();
 
-		cartResult = cartItemDAO.getCartResult();
+			totalPrice = cartItemDAO.getTotalPrice();
 
+			cartItemList.add(cartItemDTO);
+		}else{
+			result = ERROR;
+		}
 		return result;
+
 	}
 
 	public int getCount() {
@@ -56,16 +53,6 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 		this.buyCount = count;
 	}
 
-	public Map<String, Object> getSession(){
-		return session;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
-		this.session = session;
-	}
-
 	public String getCartResult() {
 		return cartResult;
 	}
@@ -74,36 +61,17 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 		this.cartResult = cartResult;
 	}
 
-	public String getItemImg() {
-		return itemImg;
+	@Override
+	public void setSession(Map<String, Object> session) {
+		// TODO 自動生成されたメソッド・スタブ
+		this.session = session;
 	}
 
-	public void setItemImg(String itemImg) {
-		this.itemImg = itemImg;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
 
-	public String getItemCategory() {
-		return itemCategory;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
-
-	public void setItemCategory(String itemCategory) {
-		this.itemCategory = itemCategory;
-	}
-
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public int getItemPrice() {
-		return itemPrice;
-	}
-
-	public void setItemPrice(int itemPrice) {
-		this.itemPrice = itemPrice;
-	}
-
 }
