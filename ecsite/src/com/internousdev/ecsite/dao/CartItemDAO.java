@@ -121,7 +121,7 @@ public class CartItemDAO {
 	}
 
 	public void setCartResult(String cartResult) {
-
+		this.cartResult = cartResult;
 	}
 
 }
