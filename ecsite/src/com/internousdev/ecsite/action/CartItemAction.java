@@ -31,7 +31,7 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 
 		if(session.containsKey("login_user_id")) {
 			int id = (int) session.get("id");
-			cartItemDAO.CartPlus(id, buyCount, session.get("login_user_id").toString());
+			cartItemDAO.CartPlus(id, buyCount, session.get("userName").toString());
 
 			cartResult = cartItemDAO.getCartResult();
 

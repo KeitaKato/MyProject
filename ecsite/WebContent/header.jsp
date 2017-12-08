@@ -19,13 +19,13 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-    
+
     <script type="text/javascript">
         $(window).on('scroll',function() {
             $('#header').toggleClass('fixed',$(this).scrollTop() > 125);
     });
     </script>
-    
+
 	<style type="text/css">
 		#header {
 		    width: 100%;
@@ -102,7 +102,7 @@
             	<div  id="header_list">
                     <div id="account_menu" class="list-group">
                         <a href="#" class="list-group-item">こんにちは、
-                        <s:if test="#session.id != null">
+                        <s:if test="session.login_user_id != null">
                             <br><b><s:property value="session.userName"/></b>
                         </s:if>
                         <s:else>
