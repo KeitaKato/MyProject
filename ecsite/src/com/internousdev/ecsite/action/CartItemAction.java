@@ -8,36 +8,55 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ecsite.dao.CartItemDAO;
 import com.internousdev.ecsite.dto.CartItemDTO;
+import com.internousdev.ecsite.dto.ItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartItemAction extends ActionSupport implements SessionAware{
 
-	public int buyCount;
+	public List<Integer> buyCountList = new ArrayList<>();
+
+	public List<Integer> idList = new ArrayList<>();
 
 	private String cartResult;
 
 	public Map<String, Object> session;
 
-	private int totalPrice;
+	public int priceCount;				//buyCountList * cartItemDTO を格納
+
+	public int totalPrice;				//カート内の合計金額 を格納
 
 	CartItemDTO cartItemDTO = new CartItemDTO();
 
 	CartItemDAO cartItemDAO = new CartItemDAO();
 
-	public List<CartItemDTO> cartItemList = new ArrayList<>();
+	public List<ItemDTO> itemList = new ArrayList<>();
 
 	public String execute() {
 		String result = SUCCESS;
 
+		ItemDTO itemDTO = (ItemDTO) session.get("itemDTO");
+
 		if(session.containsKey("login_user_id")) {
-			int id = (int) session.get("id");
-			cartItemDAO.CartPlus(id, buyCount, session.get("userName").toString());
 
-			cartResult = cartItemDAO.getCartResult();
+			int forCount = 0;
 
-			totalPrice = cartItemDAO.getTotalPrice();
+			for(int id : idList) {
 
-			cartItemList.add(cartItemDTO);
+				priceCount = itemDTO.getItemPrice() * (int)buyCountList.get(forCount);
+				cartItemDAO.CartPlus(id, priceCount, (int)buyCountList.get(forCount), session.get("login_user_id").toString());
+
+				cartResult = cartItemDAO.getCartResult();
+
+				if(totalPrice == 0) {
+					totalPrice = cartItemDAO.getUser_total_price(id, session.get("login_user_id").toString());
+				}else {
+					totalPrice += cartItemDAO.getUser_total_price(id, session.get("login_user_id").toString());
+				}
+
+				itemList.add(itemDTO);
+
+				forCount++;
+			}
 		}else{
 			result = ERROR;
 		}
@@ -45,12 +64,21 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 
 	}
 
-	public int getCount() {
-		return buyCount;
+	public List<Integer> getbuyCountList() {
+		return buyCountList;
 	}
 
-	public void setCount(int count) {
-		this.buyCount = count;
+	public void setbuyCountList(List<Integer> buyCountList) {
+		this.buyCountList = buyCountList;
+	}
+
+	public List<Integer> getId() {
+		return buyCountList;
+
+	}
+
+	public void setIdList(List<Integer> idList) {
+		this.idList = idList;
 	}
 
 	public String getCartResult() {
@@ -74,4 +102,18 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public List<ItemDTO> getCartItemList() {
+		return itemList;
+
+	}
+
+	public int getPriceCount() {
+		return priceCount;
+	}
+
+	public void setPriceCount(int priceCount) {
+		this.priceCount = priceCount;
+	}
+
 }

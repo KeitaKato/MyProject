@@ -58,7 +58,7 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
-            <s:iterator value="cartItemList">
+            <s:iterator value="itemList">
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
@@ -74,9 +74,11 @@
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
+                    <s:property value="buyCount"/>
 			     </div>
             </s:iterator>
 		</div>
+		<s:property value="totalPrice" />
 	</div>
 	<div id="left">
         <%@ include file="sidemenu.jsp"%>

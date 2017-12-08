@@ -1,4 +1,4 @@
-package com.internousdev.ecsite.dao;
+﻿package com.internousdev.ecsite.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class CartItemDAO {
 
 		String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
 		String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";
-		String updateSql = "UPDATE user_buy_item_transaction SET total_price=? total_count=? WHERE item_transaction_id=? AND user_master_id=?)";
+		String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";
 
 		String BuyItemSql = "SELECT total_price, total_count FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
 

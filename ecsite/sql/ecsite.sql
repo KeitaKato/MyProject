@@ -10,6 +10,7 @@ id int not null primary key auto_increment,
 login_id varchar(16) unique,
 login_pass varchar(16),
 user_name varchar(50),
+buy_total_price int(11),
 insert_date datetime,
 updated_date datetime
 );

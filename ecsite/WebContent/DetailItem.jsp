@@ -103,7 +103,7 @@ function buttonAction(){
                 <s:form id="item_cart" action="CartItemAction">
                     <div id="purchase_count">
                         <span>数量</span>
-                        <select name="buyCount">
+                        <select name="buyCountList">
                             <option value="1" selected="selected">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -116,6 +116,7 @@ function buttonAction(){
                             <option value="10">10</option>
                         </select>
                     </div>
+                        <input type="hidden" value='<s:property value="id"/>' name="idList"/>
                         <s:submit id="cart_button" value="カートに入れる" />
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 </s:form>

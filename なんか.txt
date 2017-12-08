@@ -26,4 +26,11 @@
                 </s:form>
 
 
+
+		idList.add((Integer)session.get("id"));
+
+
 			ItemDTO itemDTO = (ItemDTO) session.get("itemDTO");
+
+
+			

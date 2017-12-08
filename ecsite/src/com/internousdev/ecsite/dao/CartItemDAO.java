@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.internousdev.ecsite.dto.CartItemDTO;
 import com.internousdev.ecsite.util.DBConnector;
 
 public class CartItemDAO {
@@ -14,43 +13,23 @@ public class CartItemDAO {
 
 	private Connection connection = dbConnector.getConnection();
 
-	private CartItemDTO cartItemDTO = new CartItemDTO();
-
-	private int totalPrice;
-
 	private String cartResult;
 
-	public void CartPlus(int id, int count, String userId) {
+	String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?";
+
+	String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
+	String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";
+	String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";
+
+	String userSelectSql = "SELECT buy_total_price FROM login_user_transaction WHERE login_user_id=?";
+	String userInsertSql = "INSERT INTO login_user_transaction(buy_item_price) WHERE login_user_id=? >= ?";
+	String userUpdateSql = "UPDATE login_user_transaction SET total_price=? WHERE item_user_id=?";
+
+	public void CartPlus(int id,int total_price, int count, String userId) {
 
 		this.setCartResult("商品を追加できませんでした。");
 
-		String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?";
-
-		String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
-		String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";
-		String updateSql = "UPDATE user_buy_item_transaction SET total_price=? total_count=? WHERE item_transaction_id=? AND user_master_id=?)";
-
-		String itemInfoSql = "SELECT id, item_name, item_price, item_category, item_img FROM item_info_transaction where id=?";
-
-		String BuyItemSql = "SELECT total_price, total_count FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
-
 		try {
-			PreparedStatement infoPreparedStatement = connection.prepareStatement(itemInfoSql);
-			infoPreparedStatement.setInt(1, id);
-
-			ResultSet infoResultSet = infoPreparedStatement.executeQuery();
-
-			if(infoResultSet.next()) {
-
-				cartItemDTO.setId(infoResultSet.getInt("id"));
-				cartItemDTO.setItemName(infoResultSet.getString("item_name"));
-				cartItemDTO.setItemPrice(infoResultSet.getInt("item_price"));
-				cartItemDTO.setItemCategory(infoResultSet.getString("item_category"));
-				cartItemDTO.setItemImg(infoResultSet.getString("item_img"));
-			}
-
-			totalPrice = count * infoResultSet.getInt("item_price");
-
 			PreparedStatement itemStockPreparedStatement = connection.prepareStatement(itemStockSql);
 			itemStockPreparedStatement.setInt(1, id);
 			ResultSet itemStockResult = itemStockPreparedStatement.executeQuery();
@@ -63,7 +42,7 @@ public class CartItemDAO {
 
 				if(resultSet.next()) {
 					PreparedStatement updatePrepareStatement = connection.prepareStatement(updateSql);
-					updatePrepareStatement.setInt(1, resultSet.getInt("total_price") + totalPrice);
+					updatePrepareStatement.setInt(1, resultSet.getInt("total_price") + total_price);
 					updatePrepareStatement.setInt(2, resultSet.getInt("total_count") + count);
 					updatePrepareStatement.setInt(3, id);
 					updatePrepareStatement.setString(4, userId);
@@ -73,22 +52,32 @@ public class CartItemDAO {
 				}else {
 					PreparedStatement insertPreparedStatement = connection.prepareStatement(insertSql);
 					insertPreparedStatement.setInt(1, id);
-					insertPreparedStatement.setInt(2,totalPrice);
+					insertPreparedStatement.setInt(2,total_price );
 					insertPreparedStatement.setInt(3,count);
 					insertPreparedStatement.setString(4,userId);
 
 					insertPreparedStatement.executeUpdate();
 
 				}
-				PreparedStatement buyPreparedStatement = connection.prepareStatement(BuyItemSql);
-				buyPreparedStatement.setInt(1, id);
-				buyPreparedStatement.setString(2, userId);
+				PreparedStatement userSelectPreparedStatement = connection.prepareStatement(userSelectSql);
+				userSelectPreparedStatement.setString(1,userId);
 
-				ResultSet buyResultSet = buyPreparedStatement.executeQuery();
+				ResultSet userSelectResult = userSelectPreparedStatement.executeQuery();
+				if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") == 0) {
+					PreparedStatement userInsertPreparedStatement = connection.prepareStatement(userInsertSql);
+					userInsertPreparedStatement.setString(1, userId);
+					userInsertPreparedStatement.setInt(2, resultSet.getInt("total_price"));
 
-				cartItemDTO.setTotalPrice(buyResultSet.getInt("total_price"));
-				cartItemDTO.setTotalCount(buyResultSet.getInt("total_count"));
+					userInsertPreparedStatement.executeUpdate();
+				}else if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") != 0) {
+						PreparedStatement userUpdatePreapreStatement = connection.prepareStatement(userUpdateSql);
+						userUpdatePreapreStatement.setInt(1, userSelectPreparedStatement.getInt("buy_total_price") + );
+						userUpdatePreapreStatement.setString(2, userId);
 
+
+						userUpdatePreapreStatement.executeUpdate();
+					}
+				}
 				this.setCartResult("商品をカートに追加しました。");
 
 			}else {
@@ -107,21 +96,34 @@ public class CartItemDAO {
 
 	}
 
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+	public int getUser_total_price(int id, String userId) {
 
-	public int getTotalPrice() {
-		return totalPrice;
+		int total_price = 0;
+		try {
+		PreparedStatement selectPreparedStatement = connection.prepareStatement(userSelectSql);
+		selectPreparedStatement.setString(1, userId);
+		ResultSet resultSet = selectPreparedStatement.executeQuery();
+
+			if(resultSet.next()) {
+				total_price = resultSet.getInt("buy_total_price");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			connection.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return total_price;
+
+	}
+	public String getCartResult() {
+		return cartResult;
 	}
 
 	public void setCartResult(String cartResult) {
 		this.cartResult = cartResult;
-	}
-
-	public String getCartResult() {
-		// TODO 自動生成されたメソッド・スタブ
-		return cartResult;
 	}
 
 
