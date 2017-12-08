@@ -71,12 +71,12 @@ public class CartItemDAO {
 					userInsertPreparedStatement.executeUpdate();
 				}else if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") != 0) {
 						PreparedStatement userUpdatePreapreStatement = connection.prepareStatement(userUpdateSql);
-						userUpdatePreapreStatement.setInt(1, userSelectPreparedStatement.getInt("buy_total_price") + );
+						userUpdatePreapreStatement.setInt(1, userSelectResult.getInt("buy_total_price") + resultSet.getInt("total_price"));
 						userUpdatePreapreStatement.setString(2, userId);
 
 
 						userUpdatePreapreStatement.executeUpdate();
-					}
+
 				}
 				this.setCartResult("商品をカートに追加しました。");
 
@@ -84,18 +84,16 @@ public class CartItemDAO {
 				this.setCartResult("在庫数を超えていたため追加できませんでした。");
 			}
 
-		} catch(SQLException e){
+	}catch(SQLException e){
 			e.printStackTrace();
-
 		}
+
 		try {
 			connection.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-
-	}
-
+}
 	public int getUser_total_price(int id, String userId) {
 
 		int total_price = 0;
@@ -123,8 +121,8 @@ public class CartItemDAO {
 	}
 
 	public void setCartResult(String cartResult) {
-		this.cartResult = cartResult;
+
 	}
 
-
 }
+

@@ -1,4 +1,4 @@
-﻿package com.internousdev.ecsite.dao;
+package com.internousdev.ecsite.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -123,4 +123,26 @@ public class CartItemDAO {
 	}
 
 
+}
+
+
+
+
+PreparedStatement userSelectPreparedStatement = connection.prepareStatement(userSelectSql);
+userSelectPreparedStatement.setString(1,userId);
+
+ResultSet userSelectResult = userSelectPreparedStatement.executeQuery();
+if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") == 0) {
+PreparedStatement userInsertPreparedStatement = connection.prepareStatement(userInsertSql);
+userInsertPreparedStatement.setString(1, userId);
+userInsertPreparedStatement.setInt(2, resultSet.getInt("total_price"));
+
+userInsertPreparedStatement.executeUpdate();
+}else if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") != 0) {
+PreparedStatement userUpdatePreapreStatement = connection.prepareStatement(userUpdateSql);
+userUpdatePreapreStatement.setInt(1, userSelectPreparedStatement.getInt("buy_total_price") + resultSet.getInt("total_price"));
+userUpdatePreapreStatement.setString(2, userId);
+
+
+userUpdatePreapreStatement.executeUpdate();
 }
