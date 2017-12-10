@@ -21,9 +21,9 @@ public class CartItemDAO {
 	String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";
 	String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";
 
-	String userSelectSql = "SELECT buy_total_price FROM login_user_transaction WHERE login_user_id=?";
-	String userInsertSql = "INSERT INTO login_user_transaction(buy_item_price) WHERE login_user_id=? >= ?";
-	String userUpdateSql = "UPDATE login_user_transaction SET total_price=? WHERE item_user_id=?";
+	String userSelectSql = "SELECT cart_total_price FROM login_user_transaction WHERE login_id=?";
+	String userInsertSql = "INSERT INTO login_user_transaction(cart_item_price) WHERE login_id=? VALUES(?)";
+	String userUpdateSql = "UPDATE login_user_transaction SET cart_total_price=? WHERE login_id=?";
 
 	public void CartPlus(int id,int total_price, int count, String userId) {
 
@@ -63,19 +63,20 @@ public class CartItemDAO {
 				userSelectPreparedStatement.setString(1,userId);
 
 				ResultSet userSelectResult = userSelectPreparedStatement.executeQuery();
-				if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") == 0) {
+				if(userSelectResult.next()) {
+					if(userSelectResult.getInt("cart_total_price") == 0) {
 					PreparedStatement userInsertPreparedStatement = connection.prepareStatement(userInsertSql);
 					userInsertPreparedStatement.setString(1, userId);
 					userInsertPreparedStatement.setInt(2, resultSet.getInt("total_price"));
 
 					userInsertPreparedStatement.executeUpdate();
-				}else if(userSelectResult.next() && userSelectResult.getInt("buy_total_price") != 0) {
+					}else if(userSelectResult.getInt("cart_total_price") != 0) {
 						PreparedStatement userUpdatePreapreStatement = connection.prepareStatement(userUpdateSql);
-						userUpdatePreapreStatement.setInt(1, userSelectResult.getInt("buy_total_price") + resultSet.getInt("total_price"));
+						userUpdatePreapreStatement.setInt(1, userSelectResult.getInt("cart_total_price") + resultSet.getInt("total_price"));
 						userUpdatePreapreStatement.setString(2, userId);
 
-
 						userUpdatePreapreStatement.executeUpdate();
+					}
 
 				}
 				this.setCartResult("商品をカートに追加しました。");
@@ -85,12 +86,6 @@ public class CartItemDAO {
 			}
 
 	}catch(SQLException e){
-			e.printStackTrace();
-		}
-
-		try {
-			connection.close();
-		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 }
@@ -103,7 +98,7 @@ public class CartItemDAO {
 		ResultSet resultSet = selectPreparedStatement.executeQuery();
 
 			if(resultSet.next()) {
-				total_price = resultSet.getInt("buy_total_price");
+				total_price = resultSet.getInt("cart_total_price");
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
