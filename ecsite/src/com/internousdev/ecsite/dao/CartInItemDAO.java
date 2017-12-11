@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.internousdev.ecsite.util.DBConnector;
 
-public class CartItemDAO {
+public class CartInItemDAO {
 
 	private DBConnector dbConnector = new DBConnector();
 

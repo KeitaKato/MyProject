@@ -1,6 +1,6 @@
 package com.internousdev.ecsite.dto;
 
-public class CartItemDTO{
+public class CartInItemDTO{
 
 	private int id;
 

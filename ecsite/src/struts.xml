@@ -82,8 +82,8 @@
 		</action>
 
 		<!-- CartItemAction -->
-		<action name="CartItemAction" class="com.internousdev.ecsite.action.CartItemAction" method="execute">
-			<result name="success">cartItem.jsp</result>
+		<action name="CartInItemAction" class="com.internousdev.ecsite.action.CartInItemAction" method="execute">
+			<result name="success">cartInItem.jsp</result>
 			<result name="error">login.jsp</result>
 		</action>
 

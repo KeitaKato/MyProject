@@ -100,7 +100,7 @@ function buttonAction(){
             <div id="item_price">
                 <b><s:property value="itemPrice"/></b><span>円</span>
             </div>
-                <s:form id="item_cart" action="CartItemAction">
+                <s:form id="item_cart" action="CartInItemAction">
                     <div id="purchase_count">
                         <span>数量</span>
                         <select name="buyCountList">
