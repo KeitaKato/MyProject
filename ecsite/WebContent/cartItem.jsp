@@ -49,6 +49,10 @@
         span{
             font-size: 15px;
         }
+#item_list #item_box #item_count{
+    margin: 5px 0px;
+    font-size: 20px;
+}
 
     </style>
 </head>
@@ -58,7 +62,7 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
-            <s:iterator value="itemList">
+            <s:iterator value="session.itemList">
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
@@ -74,7 +78,9 @@
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
-                    <s:property value="buyCount"/>
+                    <div id="item_count">
+                    	<s:property value="buyCount"/>
+                    </div>
 			     </div>
             </s:iterator>
 		</div>

@@ -17,19 +17,15 @@ public class CartItemDAO {
 
 	private int total_price = 0;
 
-	String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?";
-
-	String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";
-	String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";
-	String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";
-
-	String userSelectSql = "SELECT * FROM login_user_transaction WHERE login_id=?";
-	String userInsertSql = "INSERT INTO login_user_transaction(cart_item_price) VALUES(?) WHERE login_id=?";
-	String userUpdateSql = "UPDATE login_user_transaction SET cart_total_price=? WHERE login_id=?";
-
 	public void CartPlus(int id,int total_price, int count, String userId) {
 
 		this.setCartResult("商品を追加できませんでした。");
+
+		String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?"; //アイテムインフォからアイテムストックを検索
+
+		String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";				//カート情報を検索
+		String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";		//カート内商品情報を登録
+		String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";	//カー都内商品情報を更新
 
 		try {
 			PreparedStatement itemStockPreparedStatement = connection.prepareStatement(itemStockSql);
@@ -61,25 +57,15 @@ public class CartItemDAO {
 					insertPreparedStatement.executeUpdate();
 
 				}
+
+				String userSelectSql = "SELECT *, sum(total_price) as cart_total_price FROM user_buy_item_transaction WHERE user_master_id= ?;";		//各ユーザーのカート内合計金額を検索
+
 				PreparedStatement userSelectPreparedStatement = connection.prepareStatement(userSelectSql);
 				userSelectPreparedStatement.setString(1,userId);
 
 				ResultSet userSelectResult = userSelectPreparedStatement.executeQuery();
 
 				if(userSelectResult.next()) {
-					if(userSelectResult.getInt("cart_total_price") == 0) {
-						PreparedStatement userInsertPreparedStatement = connection.prepareStatement(userInsertSql);
-						userInsertPreparedStatement.setString(1, userId);
-						userInsertPreparedStatement.setInt(2, resultSet.getInt("total_price"));
-
-						userInsertPreparedStatement.executeUpdate();
-					}else if(userSelectResult.getInt("cart_total_price") != 0) {
-						PreparedStatement userUpdatePreapreStatement = connection.prepareStatement(userUpdateSql);
-						userUpdatePreapreStatement.setInt(1, userSelectResult.getInt("cart_total_price") + resultSet.getInt("total_price"));
-						userUpdatePreapreStatement.setString(2, userId);
-
-						userUpdatePreapreStatement.executeUpdate();
-					}
 					this.total_price = userSelectResult.getInt("cart_total_price");
 
 				}

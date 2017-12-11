@@ -44,17 +44,19 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 				int priceCount;				//buyCountList * cartItemDTO を格納
 
 				priceCount = itemDTO.getItemPrice() * (int)buyCountList.get(forCount);
-				cartItemDAO.CartPlus(id, priceCount, (int)buyCountList.get(forCount), (String)session.get("login_user_id").toString());
+				cartItemDAO.CartPlus(id, priceCount, (int)buyCountList.get(forCount), session.get("login_user_id").toString());
 
 				cartResult = cartItemDAO.getCartResult();
 
-				if(totalPrice == 0) {
-					totalPrice = cartItemDAO.getTotal_price();
-				}else {
-					totalPrice += cartItemDAO.getTotal_price();
+				totalPrice = cartItemDAO.getTotal_price();
+
+				itemDTO.setBuyConut((int)buyCountList.get(forCount));
+
+				if(!session.containsKey(itemList)){
+					session.put("itemList", itemList);
 				}
 
-				itemList.add(itemDTO);
+				session.get(itemList.add(itemDTO));
 
 				forCount++;
 			}
