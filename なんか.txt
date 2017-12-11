@@ -33,4 +33,15 @@
 			ItemDTO itemDTO = (ItemDTO) session.get("itemDTO");
 
 
+		String userInsertSql = "INSERT INTO login_user_transaction(cart_item_price) VALUES(?) WHERE login_id=?";	//ユーザーのカート内合計金額を登録
+
+					if(userSelectResult.getInt("cart_total_price") == 0) {
+						PreparedStatement userInsertPreparedStatement = connection.prepareStatement(userInsertSql);
+						userInsertPreparedStatement.setString(1, userId);
+						userInsertPreparedStatement.setInt(2, resultSet.getInt("total_price"));
+
+						userInsertPreparedStatement.executeUpdate();
+
+					}else if(userSelectResult.getInt("cart_total_price") != 0) {
+
 			
