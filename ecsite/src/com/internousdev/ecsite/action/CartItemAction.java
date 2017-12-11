@@ -21,8 +21,6 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
-	public int priceCount;				//buyCountList * cartItemDTO を格納
-
 	public int totalPrice;				//カート内の合計金額 を格納
 
 	CartItemDTO cartItemDTO = new CartItemDTO();
@@ -42,15 +40,18 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 
 			for(int id : idList) {
 
+
+				int priceCount;				//buyCountList * cartItemDTO を格納
+
 				priceCount = itemDTO.getItemPrice() * (int)buyCountList.get(forCount);
-				cartItemDAO.CartPlus(id, priceCount, (int)buyCountList.get(forCount), session.get("login_user_id").toString());
+				cartItemDAO.CartPlus(id, priceCount, (int)buyCountList.get(forCount), (String)session.get("login_user_id").toString());
 
 				cartResult = cartItemDAO.getCartResult();
 
 				if(totalPrice == 0) {
-					totalPrice = cartItemDAO.getUser_total_price(id, session.get("login_user_id").toString());
+					totalPrice = cartItemDAO.getTotal_price();
 				}else {
-					totalPrice += cartItemDAO.getUser_total_price(id, session.get("login_user_id").toString());
+					totalPrice += cartItemDAO.getTotal_price();
 				}
 
 				itemList.add(itemDTO);
@@ -107,13 +108,4 @@ public class CartItemAction extends ActionSupport implements SessionAware{
 		return itemList;
 
 	}
-
-	public int getPriceCount() {
-		return priceCount;
-	}
-
-	public void setPriceCount(int priceCount) {
-		this.priceCount = priceCount;
-	}
-
 }

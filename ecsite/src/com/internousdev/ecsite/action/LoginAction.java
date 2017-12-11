@@ -71,7 +71,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 			// アイテム情報を取得
 			ItemDTO itemDTO = buyItemDAO.getBuyItemInfo();
-			session.put("login_user_id",	loginDTO.getLoginId());
+			session.put("login_user_id", loginDTO.getLoginId());
 			session.put("userName", loginDTO.getUserName());
 			session.put("id", itemDTO.getId());
 			session.put("item_name", itemDTO.getItemName());
