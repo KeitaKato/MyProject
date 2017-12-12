@@ -27,7 +27,7 @@ public class CartInItemAction extends ActionSupport implements SessionAware{
 
 	CartInItemDAO cartInItemDAO = new CartInItemDAO();
 
-	public List<ItemDTO> itemList = new ArrayList<>();
+	public List<ItemDTO> cartItemList = new ArrayList<>();
 
 	public String execute() {
 		String result = SUCCESS;
@@ -52,11 +52,7 @@ public class CartInItemAction extends ActionSupport implements SessionAware{
 
 				itemDTO.setBuyConut((int)buyCountList.get(forCount));
 
-				if(!session.containsKey(itemList)){
-					session.put("itemList", itemList);
-				}
-
-				session.get(itemList.add(itemDTO));
+				cartItemList.add(itemDTO);
 
 				forCount++;
 			}
@@ -107,7 +103,7 @@ public class CartInItemAction extends ActionSupport implements SessionAware{
 	}
 
 	public List<ItemDTO> getCartItemList() {
-		return itemList;
+		return cartItemList;
 
 	}
 }

@@ -23,9 +23,9 @@ public class CartInItemDAO {
 
 		String itemStockSql = "SELECT item_stock FROM item_info_transaction WHERE id=?"; //アイテムインフォからアイテムストックを検索
 
-		String selectSql = "SELECT * FROM user_buy_item_transaction WHERE item_transaction_id=? AND user_master_id=?";				//カート情報を検索
-		String insertSql = "INSERT INTO user_buy_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";		//カート内商品情報を登録
-		String updateSql = "UPDATE user_buy_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";	//カー都内商品情報を更新
+		String selectSql = "SELECT * FROM user_cart_item_transaction WHERE item_transaction_id=? AND user_master_id=?";				//カート情報を検索
+		String insertSql = "INSERT INTO user_cart_item_transaction(item_transaction_id,total_price,total_count,user_master_id) VALUES(?,?,?,?)";		//カート内商品情報を登録
+		String updateSql = "UPDATE user_cart_item_transaction SET total_price=?, total_count=? WHERE item_transaction_id=? AND user_master_id=?";	//カー都内商品情報を更新
 
 		try {
 			PreparedStatement itemStockPreparedStatement = connection.prepareStatement(itemStockSql);
@@ -58,7 +58,7 @@ public class CartInItemDAO {
 
 				}
 
-				String userSelectSql = "SELECT *, sum(total_price) as cart_total_price FROM user_buy_item_transaction WHERE user_master_id= ?;";		//各ユーザーのカート内合計金額を検索
+				String userSelectSql = "SELECT *, sum(total_price) as cart_total_price FROM user_cart_item_transaction WHERE user_master_id= ?;";		//各ユーザーのカート内合計金額を検索
 
 				PreparedStatement userSelectPreparedStatement = connection.prepareStatement(userSelectSql);
 				userSelectPreparedStatement.setString(1,userId);
@@ -67,7 +67,6 @@ public class CartInItemDAO {
 
 				if(userSelectResult.next()) {
 					this.total_price = userSelectResult.getInt("cart_total_price");
-
 				}
 				this.setCartResult("商品をカートに追加しました。");
 

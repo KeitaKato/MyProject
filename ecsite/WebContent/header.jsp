@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.balloon.js"></script>
 
     <script type="text/javascript">
         $(window).on('scroll',function() {

@@ -10,38 +10,81 @@
     <style type=text/css>
         /* ===========ITEMLIST========== */
 
-#item_list{
+#item_table{
+    padding: 0px 15px 0px;
+    height: 65px;
+}
+
+
+#item_table tr{
+    height: 65px;
+}
+#item_table tr #plus_itme{
     display: flex;
     flex-flow:row wrap;
     justify-content: center;
     align-items:flex-start;
     align-content: flex-start;
-    padding: 0px 15px 0px;
+}
+#item_info {
+	height: 65px;
+	width: 65px;
+}
+.img {
+	width:65px;
+	height: 50px;
+    position: relative;
+      padding: 0;
+      margin: 0;
+    }
+.img img{
+	width:50px;
+	height:50x;
+}
+.fukidashi {
+    display: none;
+	position: relative;
+	background: #fff;
+	border: 2px solid #999999;
+	overflow: visible;
+
+}
+.fukidashi:after, .fukidashi:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
 }
 
-
-#item_list #item_box{
-    flex-basis: 200px;
-    height: 380px;
-    margin: 20px 15px 0px;
-    background-color:darkkhaki;
+.fukidashi:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
 }
-
-#item_list #item_box #item_img img{
-	width:200px;
-	height:200px;
-    margin-bottom: 5px;
+.fukidashi:before {
+	border-color: rgba(153, 153, 153, 0);
+	border-bottom-color: #999999;
+	border-width: 13px;
+	margin-left: -13px;
 }
-#item_list #item_box #item_category{
+.img:hover + .fukidashi {
+	display: block;
+}
+#item_table #item_info #item_category{
     margin: 5px 0px;
 }
 
-#item_list #item_box #item_name{
+#item_table #item_info #item_name{
     margin: 5px 0px;
     font-size: 20px;
 }
 
-#item_list #item_box #item_price{
+#item_table #item_info #item_price{
     margin: 5px 0px;
     color:red;
     font-size: 20px;
@@ -49,7 +92,7 @@
         span{
             font-size: 15px;
         }
-#item_list #item_box #item_count{
+#item_table #item_info #item_count{
     margin: 5px 0px;
     font-size: 20px;
 }
@@ -61,34 +104,37 @@
 </div>
 <div id="main">
 	<div id="main-center">
-		<div id="item_list">
-            <s:iterator value="session.itemList">
-			     <div id="item_box">
-			     	<div id="item_img">
-                        <img src='<s:property value="itemImg"/>'>
-                    </div>
-                    <div id="item_category">
-                        <s:property value="itemCategory"/>
-                    </div>
-					<div id="item_name">
-						<a href='<s:url action="DetailItemAction"><s:param name="id" value="id" /></s:url>'>
-							<s:property value="itemName" />
-						</a>
-					</div>
-					<div id="item_price">
-                        <s:property value="itemPrice"/><span>円</span>
-                    </div>
-                    <div id="item_count">
-                    	<s:property value="buyCount"/>
-                    </div>
-			     </div>
-            </s:iterator>
+            <table border=1 id="item_table" style="table-layout:fixed;">
+			     <tr>
+			     	<td id="plus_itme">
+           				<s:iterator value="session.itemList">
+           					<div id="item_info">
+			     				<p class="img">
+                        			<img src='<s:property value="itemImg"/>'>
+								</p>
+								<p class="fukidashi">
+			     				<a href= '<s:url action= " DetailItemAction"><s:param name= " id" value= " id" /></s:url>'>
+									<s:property value= " itemName" />
+								</a><br>
+
+        						<s:property value="itemCategory"/><br>
+
+        						<s:property value="itemPrice"/><span>円</span><br>
+								</p>
+							</div>
+							<s:property value="cartResult"/>
+                    		<s:property value="buyCount"/>
+            			</s:iterator>
+                    </td>
+                    <td>
+						<b><span>カート内の小計 </span></b><b><s:property value="totalPrice" /> <span>円</span> </b>
+
+
+                    </td>
+                    </tr>
+               </table>
 		</div>
-		<s:property value="totalPrice" />
 	</div>
-	<div id="left">
-        <%@ include file="sidemenu.jsp"%>
-    </div>
 </div>
 
 </body>
