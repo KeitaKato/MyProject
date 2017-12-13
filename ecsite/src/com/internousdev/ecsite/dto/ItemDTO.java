@@ -12,7 +12,7 @@ public class ItemDTO {
 
 	private String itemImg;
 
-	private int buyConut;
+	private int buyCount;
 
 	private int totalPrice;
 
@@ -57,12 +57,12 @@ public class ItemDTO {
 
 	}
 
-	public int getBuyConut() {
-		return buyConut;
+	public int getBuyCount() {
+		return buyCount;
 	}
 
-	public void setBuyConut(int buyConut) {
-		this.buyConut = buyConut;
+	public void setBuyCount(int buyCount) {
+		this.buyCount = buyCount;
 	}
 
 	public int getTotalPrice() {

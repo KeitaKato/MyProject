@@ -110,9 +110,9 @@
                             <br><b>ゲスト</b>
                         </s:else>
 				            様</a>
-                        <a href="#" class="list-group-item">アカウント設定</a>
+				        <a href="#" class="list-group-item">アカウント設定</a>
                         <a href="#" class="list-group-item">注文履歴</a>
-                        <a href="#" class="list-group-item">カート</a>
+                        <a href='<s:url action="CartEditItemAction"></s:url>' class="list-group-item">カート</a>
                     </div>
             </div>
             </div>

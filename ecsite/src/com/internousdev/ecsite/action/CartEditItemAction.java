@@ -20,7 +20,7 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public List<ItemDTO> cartItemList = new ArrayList<>();
 
-	public String execute(){
+	public String execute() {
 
 		cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
 

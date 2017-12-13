@@ -1,6 +1,5 @@
 package com.internousdev.ecsite.action;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,7 @@ public class LineupItemAction extends ActionSupport implements SessionAware{
 	public List<ItemDTO> itemList = new ArrayList<>();
 
 
-	public String execute() throws SQLException{
+	public String execute() {
 
 	itemList = dao.getItemLineupDAOInfo();
 		return SUCCESS;

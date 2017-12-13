@@ -33,7 +33,7 @@ public class CartEditItemDAO {
 			ResultSet cartResult = cartPreparedStatement.executeQuery();
 			while(cartResult.next()){
 				ItemDTO dto = new ItemDTO();
-				dto.setBuyConut(cartResult.getInt("total_count"));
+				dto.setBuyCount(cartResult.getInt("total_count"));
 
 				PreparedStatement infoPreparedStatement = connection.prepareStatement(infoSql);
 				infoPreparedStatement.setInt(1, cartResult.getInt("item_transaction_id"));

@@ -8,12 +8,6 @@
 <%@ include file="headerMenubar.jsp" %>
 <title><s:property value="itemName"/></title>
 
-<script type="text/javascript">
-function buttonAction(){
-	var target = document.getElementById("item_cart");
-	target.submit();
-}
-</script>
 
 <style type="text/css">
 

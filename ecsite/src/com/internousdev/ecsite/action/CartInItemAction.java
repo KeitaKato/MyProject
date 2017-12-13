@@ -50,7 +50,7 @@ public class CartInItemAction extends ActionSupport implements SessionAware{
 
 				totalPrice = cartInItemDAO.getTotal_price();
 
-				itemDTO.setBuyConut((int)buyCountList.get(forCount));
+				itemDTO.setBuyCount((int)buyCountList.get(forCount));
 
 				cartItemList.add(itemDTO);
 

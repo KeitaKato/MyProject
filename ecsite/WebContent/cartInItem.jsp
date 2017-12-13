@@ -107,7 +107,7 @@
             <table border=1 id="item_table" style="table-layout:fixed;">
 			     <tr>
 			     	<td id="plus_itme">
-           				<s:iterator value="session.itemList">
+           				<s:iterator value="cartItemList">
            					<div id="item_info">
 			     				<p class="img">
                         			<img src='<s:property value="itemImg"/>'>
@@ -128,12 +128,12 @@
                     </td>
                     <td>
 						<b><span>カート内の小計 </span></b><b><s:property value="totalPrice" /> <span>円</span> </b>
-
+						<a href='<s:url action ="CartEditItemAction" ></s:url>' id="cart_link">カートの編集</a>
+						<a href='#' id="regi_link">レジに進む</a>
 
                     </td>
-                    </tr>
-               </table>
-		</div>
+                 </tr>
+           </table>
 	</div>
 </div>
 
