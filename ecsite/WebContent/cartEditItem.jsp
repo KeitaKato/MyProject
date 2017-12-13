@@ -89,7 +89,7 @@
 		}
 
 		function total_calculation(){
-			var cauntSelect = document.cartCount;
+			var cauntSelect = document.countInfo.countSelect.;
 		}
 	</script>
 </head>
