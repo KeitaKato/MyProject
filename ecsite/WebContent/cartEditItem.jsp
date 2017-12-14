@@ -126,7 +126,9 @@
                         		<s:select name="countSelect" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onChange="countPrice(<%= iteratorCount %>)"/>
-                        		<input type="hidden" name="itemPrice" id="itemPrice" value='<s:property value="itemPrice"/>' name="price"/>
+                        		<input type="hidden" name="id" value="id" />
+                        		<input type="hidden" name="itemPrice" id="itemPrice" value='<s:property value="itemPrice"/>' />
+                        		<input type="hidden" name="deleteFlg" id="deleteFlg" value="of"/>
 
                         	</s:else>
                         </s:form>
@@ -144,10 +146,11 @@
 	       <div id="cart_top">
 	       </div>
 	       <div id="cart_main">
-	       	   <b><span>小計 (3 点): </span><s:property value="total_price"/><span>円</span></b><br>
+	       	   <b><span>小計 ( 点): </span><span id="totalPrice"><s:property value="total_price" /></span><span>円</span></b><br>
                <a href='' id="regi_link" onClick="cum()">レジに進む</a>
 	       </div>
 	       <div id="cart_bottom">
+
 	       </div>
         </div>
 
@@ -158,15 +161,31 @@
 
 	var countPrice = [];
 
+	window.onload = sum();
+
 		function itemDelete(id){
 			var id =  document.getElementById(id);
 			while (id.firstChild){
 				id.removeChild(id.firstChild);
 			}
+			document.getElementById("deleteFlg").value="on";
 		}
 
-		function countPrice(iteratorCount){
-			var countSelect = document.getElementById("countSelect").selectedindex;
+		function priceSum(){
+			var totalPrice = 0;
+			var count = document.getElementsByName("countSelect");
+			var price = document.getElementsByName("itemPrice");
+			for(var i = 0; i < count.length ; i++){
+				var countPrice = parseInt(count[i].value) + parseInt(price[i].value);
+				totalPrice += countPrice;
+			}
+
+			target = document.getElementById("totalPrice");
+			target.innerHTML = totalPrice;
+		}
+
+		function totalPrice(iteratorCount){
+			var countSelect = document.getElementById("countSelect").selectedIndex;
 			var itemPrice = document.getElementById("itemPrice").value;
 
 			if(countPrice.length >= iteratorCount){
@@ -181,7 +200,9 @@
 			countPrice.forEach(function(elm){
 				sum += elm;
 			});
-			return document.write(sum);
+
+			target = document.getElementById("totalPrice");
+			target.innerHTML = totalPrice;
 		}
 
 		}
