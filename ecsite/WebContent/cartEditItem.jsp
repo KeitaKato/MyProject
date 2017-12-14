@@ -21,15 +21,13 @@
     padding: 0px 15px 0px;
 }
 
-
-#item_list #item_box{
+#item_box{
     flex-basis: 200px;
     height: 380px;
     margin: 20px 15px 0px;
     background-color:darkkhaki;
 }
-
-#item_list #item_box #item_img img{
+#item_img img{
 	width:200px;
 	height:200px;
     margin-bottom: 5px;
@@ -39,8 +37,7 @@
     margin: 5px 0px;
     font-size: 20px;
 }
-
-#item_list #item_box #item_price{
+#item_price{
     margin: 5px 0px;
     color:red;
     font-size: 20px;
@@ -88,9 +85,8 @@
 			target.submit();
 		}
 
-		function total_calculation(){
-			var cauntSelect = document.countInfo.countSelect.;
-		}
+		var countPrice = [];
+
 	</script>
 </head>
 <body>
@@ -100,7 +96,9 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
+			<% int iteratorCount = 0; %>
             <s:iterator value="cartItemList">
+            	<div id="<%= iteratorCount %>">
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
@@ -119,32 +117,25 @@
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
                     <div id="item_count">
-                    	<s:property value="cartItemList.get(0).getitemName()" />
 
                     	<s:form name="" id="countInfo" action="CartEditItemAction">
-                        		<select name="countSelect">
-                        			<option selected='<s:property value="buyCount"/>'></option>
-                            		<option value="1" >1</option>
-                            		<option value="2">2</option>
-                            		<option value="3">3</option>
-                            		<option value="4">4</option>
-                            		<option value="5">5</option>
-                            		<option value="6">6</option>
-                            		<option value="7">7</option>
-                            		<option value="8">8</option>
-                            		<option value="9">9</option>
-                            		<option value="10+">10</option>
-                        		</select>
-                        		<input type="hidden"  value='<s:property value="itemPrice"/>' name="price"/>
-                        		<s:property value="buyCount"/>
+                    		<s:if test='buyCount > 9'>
+                    			<input type="text" value='<s:property value="buyCount"/>'/>
+                    		</s:if>
+                    		<s:else>
+                        		<s:select name="countSelect" id="countSelect"
+                        		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
+                        		value='buyCount' onChange="countPrice(<%= iteratorCount %>)"/>
+                        		<input type="hidden" name="itemPrice" id="itemPrice" value='<s:property value="itemPrice"/>' name="price"/>
+
+                        	</s:else>
                         </s:form>
 
-                        <%
-
-                        %>
-
                     </div>
+                    <a onclick="itemDelete(<%=iteratorCount++%>)">削除</a>
 			     </div>
+			   </div>
+			     <% iteratorCount++; %>
             </s:iterator>
 		</div>
 	</div>
@@ -154,7 +145,7 @@
 	       </div>
 	       <div id="cart_main">
 	       	   <b><span>小計 (3 点): </span><s:property value="total_price"/><span>円</span></b><br>
-               <a href='' id="regi_link">レジに進む</a>
+               <a href='' id="regi_link" onClick="cum()">レジに進む</a>
 	       </div>
 	       <div id="cart_bottom">
 	       </div>
@@ -163,5 +154,37 @@
     </div>
 </div>
 
+    <script type="text/javascript">
+
+	var countPrice = [];
+
+		function itemDelete(id){
+			var id =  document.getElementById(id);
+			while (id.firstChild){
+				id.removeChild(id.firstChild);
+			}
+		}
+
+		function countPrice(iteratorCount){
+			var countSelect = document.getElementById("countSelect").selectedindex;
+			var itemPrice = document.getElementById("itemPrice").value;
+
+			if(countPrice.length >= iteratorCount){
+				countPrice.push(countSelect * itemPrice);
+			}else{
+				countPrice[iteratorCount] = countSelect * itemPrice;
+
+			}
+
+		function sum(){
+			var sum = 0;
+			countPrice.forEach(function(elm){
+				sum += elm;
+			});
+			return document.write(sum);
+		}
+
+		}
+	</script>
 </body>
 </html>
