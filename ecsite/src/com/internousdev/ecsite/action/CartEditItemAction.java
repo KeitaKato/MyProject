@@ -20,6 +20,12 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public List<ItemDTO> cartItemList = new ArrayList<>();
 
+	public List<Integer> selectList = new ArrayList<>();
+
+	public List<Integer> idList = new ArrayList<>();
+
+	public List<Integer> priceList = new ArrayList<>();
+
 	private int index;
 
 	public String execute() {
@@ -52,5 +58,29 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	public List<Integer> getSelectList() {
+		return selectList;
+	}
+
+	public void setSelectList(List<Integer> selectList) {
+		this.selectList = selectList;
+	}
+
+	public List<Integer> getIdList() {
+		return idList;
+	}
+
+	public void setIdList(List<Integer> idList) {
+		this.idList = idList;
+	}
+
+	public List<Integer> getPriceList() {
+		return priceList;
+	}
+
+	public void setPriceList(List<Integer> priceList) {
+		this.priceList = priceList;
 	}
 }

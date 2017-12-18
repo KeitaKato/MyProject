@@ -81,25 +81,6 @@
 }
 
     </style>
-<script type="text/javascript">
-
-	function onSubmit(index){
-
-		var form = document.getElemenById();
-
-		document.getElemenById("itemForm").action = 'CartUpdateItemAction';
-		document.getElemenById("itemForm").submit();
-	}
-
-	function deleteSubmit(){
-
-		var form = document.getElemenById("itemForm");
-
-		document.getElemenById("itemForm").action = 'CartDeleteItemAction';
-		document.getElemenById("itemForm").submit();
-	}
-
-</script>
 
 </head>
 <body>
@@ -127,23 +108,18 @@
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
-                    <s:form name="itemForm" id="itemForm">
+                    <s:form name="%{#st.index}" id="itemForm" theme="simple" action="CartUpdateItemAction">
                     <div id="item_count">
-                        <s:select name="selectList[%{#st.index}]" id="countSelect"
+                        <s:select name="select" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onchange='onSubmit()'/>
 
-
                     </div>
-                    <input type="hidden" name="idList[%{#st.index}]" value='<s:property value="id"/>' />
-                    <input type="hidden" name="priceList[%{#st.index}]" value='<s:property value="itemPrice"/>' />
-                    <input type="hidden" name="index" value='<s:property value="%{#st.index}"/>'/>
+                    <input type="hidden" name="id" value='<s:property value="id"/>' />
+                    <input type="hidden" name="price" value='<s:property value="itemPrice"/>' />
                     <a onclick='deleteSubmit()'>削除</a>
                     <noscript>
-                    	<s:submit value="削除" action="CartDeleteItemAction"/>
-                    	<s:submit value="変更" action="CartUpdateItemAction"/>
-
-
+                    	<s:submit value="変更"/>
                     </noscript>
 
                     </s:form>
@@ -167,5 +143,18 @@
 
     </div>
 </div>
+<script type="text/javascript">
+
+	function onSubmit(){
+		document.getElemenById("itemForm").action = 'CartUpdateItemAction';
+		document.getElemenById("itemForm").submit();
+	}
+
+	function deleteSubmit(){
+		document.getElemenById("itemForm").action = 'CartDeleteItemAction';
+		document.getElemenById("itemForm").submit();
+	}
+
+</script>
 </body>
 </html>

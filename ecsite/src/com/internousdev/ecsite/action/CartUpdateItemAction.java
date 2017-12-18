@@ -1,7 +1,5 @@
 package com.internousdev.ecsite.action;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -11,13 +9,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 
-	private List<Integer> selectList = new ArrayList<>();
+	public int select;
 
-	private List<Integer> idList = new ArrayList<>();
+	public int id;
 
-	private List<Integer> priceList = new ArrayList<>();
-
-	private int index;
+	public int price;
 
 	CartUpdateItemDAO dao =new CartUpdateItemDAO();
 
@@ -26,15 +22,15 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 	public Map<String,Object> session;
 
 	public String execute() {
-		System.out.println(selectList.get(index));
-		System.out.println(idList.get(index));
-		System.out.println(priceList.get(index));
+		System.out.println(select);
+		System.out.println(id);
+		System.out.println(price);
 		System.out.println(session.get("login_user_id").toString());
 
-			int totalPrice = (int)selectList.get(index) * (int)priceList.get(index);
+			int totalPrice = select * price;
 			System.out.println(totalPrice);
 
-			dao.cartUpdateItem((int)idList.get(index),totalPrice,(int)selectList.get(index), session.get("login_user_id").toString());
+			dao.cartUpdateItem(id,totalPrice,select, session.get("login_user_id").toString());
 		cartResult = dao.getResult();
 
 		return SUCCESS;
@@ -54,36 +50,28 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 
 	}
 
-	public int getIndex() {
-		return index;
+	public int getSelectList() {
+		return select;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
+	public void setSelectList(int select) {
+		this.select = select;
 	}
 
-	public List<Integer> getSelectList() {
-		return selectList;
+	public int getPriceList() {
+		return price;
 	}
 
-	public void setSelectList(List<Integer> selectList) {
-		this.selectList = selectList;
+	public void setPriceList(int price) {
+		this.price = price;
 	}
 
-	public List<Integer> getPriceList() {
-		return priceList;
+	public int getIdList() {
+		return id;
 	}
 
-	public void setPriceList(List<Integer> priceList) {
-		this.priceList = priceList;
-	}
-
-	public List<Integer> getIdList() {
-		return idList;
-	}
-
-	public void setIdList(List<Integer> idList) {
-		this.idList = idList;
+	public void setIdList(int id) {
+		this.id = id;
 	}
 
 

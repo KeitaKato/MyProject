@@ -11,9 +11,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CartDeleteItemAction extends ActionSupport implements SessionAware{
 
-	private Map<String, Object> session;
+	public Map<String, Object> session;
 
-	private List<Integer> idList = new ArrayList<>();
+	public List<Integer> idList = new ArrayList<>();
 
 	private int index;
 
