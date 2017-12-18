@@ -20,6 +20,8 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public List<ItemDTO> cartItemList = new ArrayList<>();
 
+	private int index;
+
 	public String execute() {
 
 		cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
@@ -42,5 +44,13 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }

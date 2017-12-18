@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
+    <%@ page import="java.io.*" %>
+	<%@ page import="java.util.ArrayList" %>
     <%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -79,15 +81,26 @@
 }
 
     </style>
-    <script type="text/javascript">
-		function buttonAction(){
-			var target = document.getElementById("cartCount");
-			target.submit();
-		}
+<script type="text/javascript">
 
-		var countPrice = [];
+	function onSubmit(index){
 
-	</script>
+		var form = document.getElemenById();
+
+		document.getElemenById("itemForm").action = 'CartUpdateItemAction';
+		document.getElemenById("itemForm").submit();
+	}
+
+	function deleteSubmit(){
+
+		var form = document.getElemenById("itemForm");
+
+		document.getElemenById("itemForm").action = 'CartDeleteItemAction';
+		document.getElemenById("itemForm").submit();
+	}
+
+</script>
+
 </head>
 <body>
 <div id="top">
@@ -96,9 +109,7 @@
 <div id="main">
 	<div id="main-center">
 		<div id="item_list">
-			<% int iteratorCount = 0; %>
-            <s:iterator value="cartItemList">
-            	<div id="<%= iteratorCount %>">
+            <s:iterator value="cartItemList" status="st" >
 			     <div id="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
@@ -116,29 +127,29 @@
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
+                    <s:form name="itemForm" id="itemForm">
                     <div id="item_count">
-
-                    	<s:form name="" id="countInfo" action="CartEditItemAction">
-                    		<s:if test='buyCount > 9'>
-                    			<input type="text" value='<s:property value="buyCount"/>'/>
-                    		</s:if>
-                    		<s:else>
-                        		<s:select name="countSelect" id="countSelect"
+                        <s:select name="selectList.[%{#st.index}]" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
-                        		value='buyCount' onChange="countPrice(<%= iteratorCount %>)"/>
-                        		<input type="hidden" name="id" value="id" />
-                        		<input type="hidden" name="itemPrice" id="itemPrice" value='<s:property value="itemPrice"/>' />
-                        		<input type="hidden" name="deleteFlg" id="deleteFlg" value="of"/>
+                        		value='buyCount' onchange='onSubmit()'/>
 
-                        	</s:else>
-                        </s:form>
 
                     </div>
-                    <a onclick="itemDelete(<%=iteratorCount++%>)">削除</a>
+                    <input type="hidden" name="idList.[%{#st.index}]" value='<s:property value="id"/>' />
+                    <input type="hidden" name="priceList.[%{#st.index}]" value='<s:property value="itemPrice"/>' />
+                    <input type="hidden" name="index" value='<s:property value="%{#st.index}"/>'/>
+                    <a onclick='deleteSubmit()'>削除</a>
+                    <noscript>
+                    	<s:submit value="削除" action="CartDeleteItemAction"/>
+                    	<s:submit value="変更" action="CartUpdateItemAction"/>
+
+
+                    </noscript>
+
+                    </s:form>
 			     </div>
-			   </div>
-			     <% iteratorCount++; %>
             </s:iterator>
+            <s:property value="CartResult"/>
 		</div>
 	</div>
     <div id="right">
@@ -146,7 +157,7 @@
 	       <div id="cart_top">
 	       </div>
 	       <div id="cart_main">
-	       	   <b><span>小計 ( 点): </span><span id="totalPrice"><s:property value="total_price" /></span><span>円</span></b><br>
+	       	   <b><span>小計 ( 点): </span><s:property value="total_price" /><span>円</span></b><br>
                <a href='' id="regi_link" onClick="cum()">レジに進む</a>
 	       </div>
 	       <div id="cart_bottom">
@@ -156,56 +167,5 @@
 
     </div>
 </div>
-
-    <script type="text/javascript">
-
-	var countPrice = [];
-
-	window.onload = sum();
-
-		function itemDelete(id){
-			var id =  document.getElementById(id);
-			while (id.firstChild){
-				id.removeChild(id.firstChild);
-			}
-			document.getElementById("deleteFlg").value="on";
-		}
-
-		function priceSum(){
-			var totalPrice = 0;
-			var count = document.getElementsByName("countSelect");
-			var price = document.getElementsByName("itemPrice");
-			for(var i = 0; i < count.length ; i++){
-				var countPrice = parseInt(count[i].value) + parseInt(price[i].value);
-				totalPrice += countPrice;
-			}
-
-			target = document.getElementById("totalPrice");
-			target.innerHTML = totalPrice;
-		}
-
-		function totalPrice(iteratorCount){
-			var countSelect = document.getElementById("countSelect").selectedIndex;
-			var itemPrice = document.getElementById("itemPrice").value;
-
-			if(countPrice.length >= iteratorCount){
-				countPrice.push(countSelect * itemPrice);
-			}else{
-				countPrice[iteratorCount] = countSelect * itemPrice;
-
-			}
-
-		function sum(){
-			var sum = 0;
-			countPrice.forEach(function(elm){
-				sum += elm;
-			});
-
-			target = document.getElementById("totalPrice");
-			target.innerHTML = totalPrice;
-		}
-
-		}
-	</script>
 </body>
 </html>
