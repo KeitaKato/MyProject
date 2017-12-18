@@ -129,14 +129,14 @@
                     </div>
                     <s:form name="itemForm" id="itemForm">
                     <div id="item_count">
-                        <s:select name="selectList.[%{#st.index}]" id="countSelect"
+                        <s:select name="selectList[%{#st.index}]" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onchange='onSubmit()'/>
 
 
                     </div>
-                    <input type="hidden" name="idList.[%{#st.index}]" value='<s:property value="id"/>' />
-                    <input type="hidden" name="priceList.[%{#st.index}]" value='<s:property value="itemPrice"/>' />
+                    <input type="hidden" name="idList[%{#st.index}]" value='<s:property value="id"/>' />
+                    <input type="hidden" name="priceList[%{#st.index}]" value='<s:property value="itemPrice"/>' />
                     <input type="hidden" name="index" value='<s:property value="%{#st.index}"/>'/>
                     <a onclick='deleteSubmit()'>削除</a>
                     <noscript>
