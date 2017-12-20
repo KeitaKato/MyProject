@@ -94,6 +94,7 @@
 
 		<action name="CartUpdateItemAction" class="com.internousdev.ecsite.action.CartUpdateItemAction" method="execute">
 			<result type="chain" name="success">CartEditItemAction</result>
+			<result name="error" type="chain">RegiItemAction</result>
 		</action>
 
 		<action name="RegiItemAction" class="com.internousdev.ecsite.action.RegiItemAction" method="execute">

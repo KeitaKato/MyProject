@@ -22,14 +22,7 @@
 	<script src="js/jquery.balloon.js"></script>
 
     <script type="text/javascript">
-        $(window).on('scroll',function() {
-            $('#header').toggleClass('fixed',$(this).scrollTop() > 125);
-    });
-        function onSubmit(){
 
-    		document.getElemenById("search_window").action = 'SearchAction';
-    		document.getElemenById("search_window").submit();
-    	}
     </script>
 
 	<style type="text/css">
@@ -37,6 +30,9 @@
 		    width: 100%;
             height: 70px;
             background-color: #f0f0f0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 		}
 
 		#title a{
@@ -45,12 +41,6 @@
             padding-left: 10px;
             font-size: 30px;
 			color: black;
-		}
-
-		#search_window{
-			margin-top: 1px;
-			margin-right: 5px;
-           	width:  500px;
 		}
 
         #header_list div{
@@ -64,10 +54,9 @@
             text-align: center;
         }
         #sample {
+        width: 1000px;
  padding:10px;
  margin-bottom:10px;
- display: flex;
-justify-content: column;
 }
 #sample .text {
  width:212px;
@@ -77,12 +66,6 @@ justify-content: column;
  text-indent:10px;
 }
 #sample .btn {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        outline: none;
-        padding: 0;
-        appearance: none;
  height:40px;
  border:5px solid #CCC;
  width:40px;
@@ -100,15 +83,16 @@ justify-content: column;
 	 		    </a>
 
             </div>
+            <s:form action="SearchAction">
             	<div id="sample">
-            		<s:form action="SearchAction" id="search_window">
-            			<input type="text" name="searchValue" class="text" placeholder="商品検索"/>
+            			<input type="text" name="searchValue" class="text" placeholder="商品検索">
             			<s:submit class="btn" type="button" value="検索">
             				<i class='glyphicon glyphicon-search' onclick="onSubmit()"></i>
             			</s:submit>
 
-            		</s:form>
+
             	</div>
+            </s:form>
 
 
             	<div  id="header_list">

@@ -38,13 +38,7 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 		total_price = cartEditItemDAO.getTotal_price();
 
-		if(branch == null){
 
-		result = SUCCESS;
-
-		}else if(branch.equals("regi")){
-			result = ERROR;
-		}
 
 		return result;
 

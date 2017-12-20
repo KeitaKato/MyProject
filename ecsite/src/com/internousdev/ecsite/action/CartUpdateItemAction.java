@@ -39,6 +39,7 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 		System.out.println(deleteFlg);
 		System.out.println(index);
 		System.out.println(branch);
+		String result = null;
 
 		if(branch == null){
 
@@ -49,6 +50,7 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 				dao.cartDeleteItem(idList.get((int)deleteFlg), session.get("login_user_id").toString());
 			}
 
+			result = SUCCESS;
 		}else if(branch.equals("regi")){
 
 			int forCount = 0;
@@ -60,10 +62,12 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 
 				forCount++;
 
+				result = ERROR;
 			}
 
+
 		}
-		return SUCCESS;
+		return result;
 	}
 
 

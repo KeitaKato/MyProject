@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
 <head>
+<script type="java/script">
+
+        $(window).on('scroll',function() {
+            $('#headerMenu').toggleClass('fixed',$(this).scrollTop() > 70);
+    });
+</script>
 <style type="text/css">
 /* ==========HEADERMENU=========== */
 #headerMenu{
@@ -9,6 +15,19 @@
     height: 50px;
     background-color: black;
 }
+        #headerMenu #fixheader{
+			position: absolute;
+            background-color: black;
+			width: 100%;
+			top: 70px;
+            z-index: 1;
+        }
+		#headerMenu.fixed #fixheader{
+			position: fixed;
+			top: 0px;
+            z-index: 1;
+		}
+
 #Menu{
 	width: 100%;
 	height: 50px;
@@ -16,22 +35,6 @@
     align-items: center;
     justify-content: space-between;
 }
-        #Menu #fixheader{
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-            flex-wrap: wrap;
-			position: absolute;
-            background-color: #f0f0f0;
-			width: 100%;
-			top: 0px;
-            z-index: 1;
-        }
-		#Menu.fixed #fixheader{
-			position: fixed;
-			top: 0px;
-            z-index: 1;
-		}
 #Menu li{
     list-style: none;
     flex-basis: 20%;
@@ -50,9 +53,10 @@
 
 
 </style>
+
 </head>
 <body>
-<div id=headerMenu>
+<div id="headerMenu">
 	<div id="fixheader">
 		<ul id="Menu">
 			<li><s:a action="LineupItemAction">全商品一覧</s:a>
