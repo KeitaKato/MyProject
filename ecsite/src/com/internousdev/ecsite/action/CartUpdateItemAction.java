@@ -15,7 +15,7 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 
 	public int price;
 
-	public boolean deleteFlg;
+	public String deleteFlg;
 
 	CartUpdateItemDAO dao =new CartUpdateItemDAO();
 
@@ -32,10 +32,11 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 
 			int totalPrice = select * price;
 			System.out.println(totalPrice);
-		if(deleteFlg == false) {
-			dao.cartDeleteItem(id,session.get("login_user_id").toString());
-		}else {
+		if(deleteFlg == null) {
 			dao.cartUpdateItem(id,totalPrice,select, session.get("login_user_id").toString());
+			cartResult = dao.getResult();
+		}else if(deleteFlg.equals("on")){
+			dao.cartDeleteItem(id,session.get("login_user_id").toString());
 			cartResult = dao.getResult();
 		}
 
@@ -80,11 +81,11 @@ public class CartUpdateItemAction extends ActionSupport implements SessionAware{
 		this.id = id;
 	}
 
-	public boolean getDeleteFlg() {
+	public String getDeleteFlg() {
 		return deleteFlg;
 	}
 
-	public void setDeleteFlg(boolean deleteFlg) {
+	public void setDeleteFlg(String deleteFlg) {
 		this.deleteFlg = deleteFlg;
 	}
 

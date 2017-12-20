@@ -28,15 +28,21 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 
 	public String execute() throws SQLException{
 
-		for(int i: id) {
+		if(session.containsKey("login_user_id")){
 
-			if(deleteFlg.get(i).equals("off")) {
-				updateDAO.cartDeleteItem(i, session.get("login_user_id").toString());
-			}else {
-				int totalPrice = (int)select.get(i) * (int)price.get(i);
-				updateDAO.cartUpdateItem(i,totalPrice,(int)select.get(i), session.get("login_user_id").toString());
+			for(int i: id) {
+
+				if(deleteFlg.get(i) == null) {
+					int totalPrice = (int)select.get(i) * (int)price.get(i);
+					updateDAO.cartUpdateItem(i,totalPrice,(int)select.get(i), session.get("login_user_id").toString());
+				}else if(deleteFlg.get(i).equals("on")){
+					updateDAO.cartDeleteItem(i, session.get("login_user_id").toString());
+				}
+
 			}
 
+		}else{
+			return ERROR;
 		}
 
 

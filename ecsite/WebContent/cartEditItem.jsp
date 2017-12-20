@@ -42,10 +42,8 @@
 #item_name{
     margin: 5px 0px;
     font-size: 20px;
-	pointer-events: auto;
 }
 #deleteFlg{
-	display:none;
 }
 #item_price{
     margin: 5px 0px;
@@ -57,7 +55,6 @@
         }
 
 #box_label{
-	pointer-events: auto;
 }
 
 #item_count{
@@ -66,7 +63,6 @@
 
 }
 #countSelect{
-	pointer-events: auto;
 	margin-top: 10px;
 }
 #update{
@@ -76,11 +72,6 @@
         outline: none;
         padding: 0;
         appearance: none;
-	pointer-events: auto;
-}
-
-input[type=checkbox]:checked + lable .item_box *{
-	display:none;
 }
 #cart_box{
 	width:300px;
@@ -126,7 +117,7 @@ input[type=checkbox]:checked + lable .item_box *{
 	<div id="main-center">
 		<div id="item_list">
             <s:iterator value="cartItemList" status="st" >
-            	<s:form name="%{#st.index}" id="itemForm" theme="simple" action="CartUpdateItemAction">
+            	<s:form name="%{#st.index}" id="%{#st.index}" theme="simple" action="CartUpdateItemAction">
 
 
 
@@ -144,13 +135,9 @@ input[type=checkbox]:checked + lable .item_box *{
 							</a>
 						</div>
 
-            		<label id="box_label">
-            		 <input type="checkbox" name="deleteFlg" id="deleteFlg"  class="not_event">
 
+                    	<s:submit name="deleteFlg" type="button" value="%{#st.index}" id="delete_link" class="not_event">削除</s:submit>
 
-                    	<s:submit value="削除" id="delete_link" class="not_event"/>
-
-			     	</label>
 					</div>
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
@@ -160,9 +147,7 @@ input[type=checkbox]:checked + lable .item_box *{
                         <s:select name="select" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onchange='onSubmit()'/>
-                    <noscript>
                     	<s:submit value="変更" id="update" class="not_event"/>
-                    </noscript>
 
                     </div>
 			     </div>
