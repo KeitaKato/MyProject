@@ -12,32 +12,40 @@
     <style type=text/css>
         /* ===========ITEMLIST========== */
 #top{
-	float:left;
 }
 #item_list{
-    display: flex;
-    flex-flow:row wrap;
-    justify-content: center;
-    align-items:flex-start;
-    align-content: flex-start;
-    padding: 0px 15px 0px;
-}
+	width: 90%;
+    margin: 0 auto;
+    border-bottom: solid 1px;
+    border-color: lightgray;
 
-#item_box{
-    flex-basis: 200px;
-    height: 380px;
-    margin: 20px 15px 0px;
-    background-color:darkkhaki;
+}
+.item_box{
+	width: 100%;
+    height: 140px;
+    border-top: solid 1px;
+    border-color: lightgray;
+    display:flex;
+    justify-content: space-between;
 }
 #item_img img{
-	width:200px;
-	height:200px;
+	width: 20%;
+	height:100%;
     margin-bottom: 5px;
-}#item_category{
+}
+#item_info{
+	width: 54%
+}
+#item_category{
     margin: 5px 0px;
-}#item_name{
+        }
+#item_name{
     margin: 5px 0px;
     font-size: 20px;
+	pointer-events: auto;
+}
+#deleteFlg{
+	display:none;
 }
 #item_price{
     margin: 5px 0px;
@@ -47,6 +55,33 @@
         span{
             font-size: 15px;
         }
+
+#box_label{
+	pointer-events: auto;
+}
+
+#item_count{
+	display: flex;
+	flex-direction: column;
+
+}
+#countSelect{
+	pointer-events: auto;
+	margin-top: 10px;
+}
+#update{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+	pointer-events: auto;
+}
+
+input[type=checkbox]:checked + lable .item_box *{
+	display:none;
+}
 #cart_box{
 	width:300px;
 	height: 275px;
@@ -91,7 +126,11 @@
 	<div id="main-center">
 		<div id="item_list">
             <s:iterator value="cartItemList" status="st" >
-			     <div id="item_box">
+            	<s:form name="%{#st.index}" id="itemForm" theme="simple" action="CartUpdateItemAction">
+
+
+
+			     <div id="item_box" class="item_box">
 			     	<div id="item_img">
                         <img src='<s:property value="itemImg"/>'>
                     </div>
@@ -104,31 +143,41 @@
 								<s:property value="itemName" />
 							</a>
 						</div>
+
+            		<label id="box_label">
+            		 <input type="checkbox" name="deleteFlg" id="deleteFlg"  class="not_event">
+
+
+                    	<s:submit value="削除" id="delete_link" class="not_event"/>
+
+			     	</label>
 					</div>
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
                     </div>
-                    <s:form name="%{#st.index}" id="itemForm" theme="simple" action="CartUpdateItemAction">
+
                     <div id="item_count">
                         <s:select name="select" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onchange='onSubmit()'/>
-
-                    </div>
-                    <input type="hidden" name="id" value='<s:property value="id"/>' />
-                    <input type="hidden" name="price" value='<s:property value="itemPrice"/>' />
-                    <a onclick='deleteSubmit()'>削除</a>
                     <noscript>
-                    	<s:submit value="変更"/>
+                    	<s:submit value="変更" id="update" class="not_event"/>
                     </noscript>
 
-                    </s:form>
+                    </div>
 			     </div>
+                    <input type="hidden" name="id" value='<s:property value="id"/>' />
+                    <input type="hidden" name="price" value='<s:property value="itemPrice"/>' />
+			   </s:form>
             </s:iterator>
             <s:property value="CartResult"/>
 		</div>
 	</div>
     <div id="right">
+    	<noscript>
+    		<p>javascript無効状態でページを離れると、<br>
+    		変更状態が維持されません！</p>
+    	</noscript>
         <div id="cart_box">
 	       <div id="cart_top">
 	       </div>

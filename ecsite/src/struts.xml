@@ -95,10 +95,6 @@
 			<result type="chain" name="success">CartEditItemAction</result>
 		</action>
 
-		<action name="CartDeleteItemAction" class="com.internousdev.ecsite.action.CartDeleteItemAction" method="execute">
-			<result type="chain" name="success">CartEditItemAction</result>
-		</action>
-
 		<!--  SearchAction -->
 		<action name="SearchAction" class="com.internousdev.ecsite.action.SearchAction" method="execute">
 			<result name="success">search.jsp</result>
