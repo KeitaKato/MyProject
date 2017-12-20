@@ -25,6 +25,11 @@
         $(window).on('scroll',function() {
             $('#header').toggleClass('fixed',$(this).scrollTop() > 125);
     });
+        function onSubmit(){
+
+    		document.getElemenById("search_window").action = 'SearchAction';
+    		document.getElemenById("search_window").submit();
+    	}
     </script>
 
 	<style type="text/css">
@@ -92,9 +97,9 @@
             		<div class="input-group">
             			<input type="text" name="searchValue" class="form-control">
             			<span class="input-group-btn">
-            				<button class="btn btn-default" type="submit" value="検索">検索
-            					<i class='glyphicon glyphicon-search'></i>
-            				</button>
+            				<s:submit class="btn btn-default" type="button" value="検索">検索
+            					<i class='glyphicon glyphicon-search' onclick="onSubmit()"></i>
+            				</s:submit>
             			</span>
             		</div>
             	</s:form>
