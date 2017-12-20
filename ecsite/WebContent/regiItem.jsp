@@ -8,7 +8,7 @@
 <html>
 <%@ include file="headerMenubar.jsp" %>
 <head>
-<title>カート内商品一覧</title>
+<title>購入確認画面</title>
     <style type=text/css>
         /* ===========ITEMLIST========== */
 #top{
@@ -115,9 +115,9 @@
 </div>
 <div id="main">
 	<div id="main-center">
-       <s:form name="itemForm" id="itemForm" theme="simple" action="CartUpdateItemAction">
 		<div id="item_list">
             <s:iterator value="cartItemList" status="st" >
+            	<s:form name="itemForm" id="itemForm" theme="simple" action="CartUpdateItemAction">
 
 
 
@@ -134,9 +134,10 @@
 								<s:property value="itemName" />
 							</a>
 						</div>
-						<label>
-                    	<s:submit name="deleteFlg" type="button" value="%{#st.index}" id="delete_link" class="not_event">削除</s:submit>
-						</label>
+
+						<input type="hidden" name="index" value='<s:property value="%{#st.index}"/>'/>
+                    	<s:submit name="deleteFlg" type="button" value="on" id="delete_link" class="not_event">削除</s:submit>
+
 					</div>
 					<div id="item_price">
                         <s:property value="itemPrice"/><span>円</span>
@@ -146,16 +147,16 @@
                         <s:select name="selectList" id="countSelect"
                         		list="#{ '1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'10+'}"
                         		value='buyCount' onchange='onSubmit()'/>
-                    	<s:submit type="button" name="index" value="%{#st.index}" id="update" class="not_event">変更</s:submit>
+                    	<s:submit value="変更" id="update" class="not_event"/>
 
                     </div>
 			     </div>
                     <input type="hidden" name="idList" value='<s:property value="id"/>' />
                     <input type="hidden" name="priceList" value='<s:property value="itemPrice"/>' />
+			   </s:form>
             </s:iterator>
             <s:property value="CartResult"/>
 		</div>
-	</s:form>
 	</div>
     <div id="right">
     	<noscript>

@@ -38,22 +38,6 @@
             height: 70px;
             background-color: #f0f0f0;
 		}
-        #header #fixheader{
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-            flex-wrap: wrap;
-			position: absolute;
-            background-color: #f0f0f0;
-			width: 100%;
-			top: 0px;
-            z-index: 1;
-        }
-		#header.fixed #fixheader{
-			position: fixed;
-			top: 0px;
-            z-index: 1;
-		}
 
 		#title a{
 			display: block;
@@ -79,30 +63,52 @@
             width: 125px;
             text-align: center;
         }
+        #sample {
+ padding:10px;
+ margin-bottom:10px;
+ display: flex;
+justify-content: column;
+}
+#sample .text {
+ width:212px;
+ height:30px;
+ border:5px solid #CCC;
+ border-radius:20px;
+ text-indent:10px;
+}
+#sample .btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+ height:40px;
+ border:5px solid #CCC;
+ width:40px;
+ border-radius:20px;
+ margin-left:-44px;
+}
 
 	</style>
 </head>
 <body>
     <div id="header">
-        <div id="fixheader">
             <div  id="title">
             	<a href="home.jsp">
 	 		        ECサイト
 	 		    </a>
 
             </div>
+            	<div id="sample">
+            		<s:form action="SearchAction" id="search_window">
+            			<input type="text" name="searchValue" class="text" placeholder="商品検索"/>
+            			<s:submit class="btn" type="button" value="検索">
+            				<i class='glyphicon glyphicon-search' onclick="onSubmit()"></i>
+            			</s:submit>
 
-
-            	<s:form action="SearchAction" id="search_window">
-            		<div class="input-group">
-            			<input type="text" name="searchValue" class="form-control">
-            			<span class="input-group-btn">
-            				<s:submit class="btn btn-default" type="button" value="検索">検索
-            					<i class='glyphicon glyphicon-search' onclick="onSubmit()"></i>
-            				</s:submit>
-            			</span>
-            		</div>
-            	</s:form>
+            		</s:form>
+            	</div>
 
 
             	<div  id="header_list">
@@ -121,6 +127,5 @@
                     </div>
             </div>
             </div>
-</div>
 </body>
 </html>

@@ -26,15 +26,27 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public List<Integer> priceList = new ArrayList<>();
 
+	private String branch;
+
 	private int index;
 
 	public String execute() {
+
+		String result = SUCCESS;
 
 		cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
 
 		total_price = cartEditItemDAO.getTotal_price();
 
-		return SUCCESS;
+		if(branch == null){
+
+		result = SUCCESS;
+
+		}else if(branch.equals("regi")){
+			result = ERROR;
+		}
+
+		return result;
 
 	}
 
@@ -82,5 +94,13 @@ public class CartEditItemAction extends ActionSupport implements SessionAware{
 
 	public void setPriceList(List<Integer> priceList) {
 		this.priceList = priceList;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
 	}
 }

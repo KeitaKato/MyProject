@@ -1,53 +1,58 @@
 package com.internousdev.ecsite.action;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ecsite.dao.CartUpdateItemDAO;
+import com.internousdev.ecsite.dao.CartEditItemDAO;
+import com.internousdev.ecsite.dto.ItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegiItemAction extends ActionSupport implements SessionAware{
 
+	private int total_price = 0;
+
+	CartEditItemDAO cartEditItemDAO = new CartEditItemDAO();
+
 	public Map<String, Object> session;
 
-	private List<Integer> id = new ArrayList<>();
+	public List<ItemDTO> cartItemList = new ArrayList<>();
 
-	private List<Integer> select = new ArrayList<>();
+	public List<Integer> selectList = new ArrayList<>();
 
-	private List<Integer> price = new ArrayList<>();
+	public List<Integer> idList = new ArrayList<>();
 
-	private List<String> deleteFlg = new ArrayList<>();
+	public List<Integer> priceList = new ArrayList<>();
 
-	CartUpdateItemDAO updateDAO = new CartUpdateItemDAO();
+	private String branch;
 
+	private int index;
 
+	public String execute() {
 
-	public String execute() throws SQLException{
+		String result = SUCCESS;
 
-		if(session.containsKey("login_user_id")){
-
-			for(int i: id) {
-
-				if(deleteFlg.get(i) == null) {
-					int totalPrice = (int)select.get(i) * (int)price.get(i);
-					updateDAO.cartUpdateItem(i,totalPrice,(int)select.get(i), session.get("login_user_id").toString());
-				}else if(deleteFlg.get(i).equals("on")){
-					updateDAO.cartDeleteItem(i, session.get("login_user_id").toString());
-				}
-
-			}
-
+		if(!session.containsKey("login_user_id")){
+			result = ERROR;
 		}else{
-			return ERROR;
+
+			cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
+
+			total_price = cartEditItemDAO.getTotal_price();
 		}
 
+		return result;
 
-		return SUCCESS;
+	}
 
+	public int getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
 	}
 
 	@Override
@@ -56,37 +61,51 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 		this.session = session;
 	}
 
-	public List<Integer> getId() {
-		return id;
+	public int getIndex() {
+		return index;
 	}
 
-	public void setId(List<Integer> id) {
-		this.id = id;
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
-	public List<Integer> getSelect() {
-		return select;
+	public List<Integer> getSelectList() {
+		return selectList;
 	}
 
-	public void setSelect(List<Integer> select) {
-		this.select = select;
+	public void setSelectList(List<Integer> selectList) {
+		this.selectList = selectList;
 	}
 
-	public List<Integer> getPrice() {
-		return price;
+	public List<Integer> getIdList() {
+		return idList;
 	}
 
-	public void setPrice(List<Integer> price) {
-		this.price = price;
+	public void setIdList(List<Integer> idList) {
+		this.idList = idList;
 	}
 
-	public List<String> getDeleteFlg() {
-		return deleteFlg;
+	public List<Integer> getPriceList() {
+		return priceList;
 	}
 
-	public void setDeleteFlg(List<String> deleteFlg) {
-		this.deleteFlg = deleteFlg;
+	public void setPriceList(List<Integer> priceList) {
+		this.priceList = priceList;
 	}
 
+	public String getBranch() {
+		return branch;
+	}
 
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public List<ItemDTO> getCartItemList(){
+		return cartItemList;
+	}
+
+	public void setCartItemList(List<ItemDTO> cartItemList){
+		this.cartItemList = cartItemList;
+	}
 }
