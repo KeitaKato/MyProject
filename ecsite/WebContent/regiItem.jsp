@@ -117,7 +117,7 @@
 	<div id="main-center">
 		<div id="item_list">
             <s:iterator value="cartItemList" status="st" >
-            	<s:form name="itemForm" id="itemForm" theme="simple" action="CartUpdateItemAction">
+            	<s:form name="itemForm" id="itemForm" theme="simple" action="RegiUpdateItemAction">
 
 
 
@@ -136,7 +136,7 @@
 						</div>
 
 						<input type="hidden" name="index" value='<s:property value="%{#st.index}"/>'/>
-                    	<s:submit name="deleteFlg" type="button" value="on" id="delete_link" class="not_event">削除</s:submit>
+                    	<s:submit name="deleteFlg" type="button" value="%{#st.index}" id="delete_link" class="not_event">削除</s:submit>
 
 					</div>
 					<div id="item_price">
