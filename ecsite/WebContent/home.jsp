@@ -91,6 +91,7 @@
 			<a href="userCreate.jsp">ユーザー登録画面</a><br>
 			<a href="userCreateComplete.jsp">ユーザー登録完了画面</a><br>
 			<a href="userCreateConfirm.jsp">ユーザー登録確認画面</a><br>
+			<a href="address.jsp">住所登録</a>
 			<br>
 			<br>
 			<br>

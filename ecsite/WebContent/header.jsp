@@ -54,7 +54,6 @@
             text-align: center;
         }
         #sample {
-        width: 1000px;
  padding:10px;
  margin-bottom:10px;
 }

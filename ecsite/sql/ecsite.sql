@@ -13,6 +13,22 @@ cart_total_price int(11) default 0,
 insert_date datetime,
 updated_date datetime
 );
+
+drop table if exists user_address_transaction;
+create table user_address_transaction(
+id int not null primary key auto_increment,
+user_master_id varchar(16),
+user_name varchar(50),
+postal_code varchar(8),
+prefectures_code int,
+city varchar(255),
+room varchar(255),
+phone_number varchar(255),
+insert_date datetime,
+update_date datetime
+);
+
+
 drop table if exists item_info_transaction;
 create table item_info_transaction(
 id int not null primary key auto_increment,
