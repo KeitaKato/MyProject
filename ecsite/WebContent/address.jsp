@@ -14,6 +14,9 @@
 	display: none;
 
 	}
+	b{
+		color:red;
+	}
 	</style>
     <script>
     </script>
@@ -23,6 +26,7 @@
 	<div id="main">
 		<div id="main-center">
 		    <h1>住所を設定してください</h1>
+		    <b><s:property value="errorMessage"/></b>
 			<s:form action="AddressCompleteAction" >
 				氏名<br>
 				<input type="text" name="name" value="名前を入力"/>

@@ -23,7 +23,7 @@ postal_code varchar(8),
 prefectures_code int,
 city varchar(255),
 room varchar(255),
-phone_number varchar(255),
+phone_number varchar(13),
 insert_date datetime,
 update_date datetime
 );
