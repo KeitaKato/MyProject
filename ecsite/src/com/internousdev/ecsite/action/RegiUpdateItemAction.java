@@ -37,13 +37,35 @@ public class RegiUpdateItemAction extends ActionSupport implements SessionAware{
 		System.out.println(deleteFlg);
 		System.out.println(index);
 		System.out.println(branch);
+		String result = null;
+
+		if(branch == null){
+
 			if(deleteFlg == null) {
 				int totalPrice = (int)selectList.get(index) * (int)priceList.get(index);
 				dao.cartUpdateItem(idList.get(index),totalPrice,(int)selectList.get(index), session.get("login_user_id").toString());
 			}else if(deleteFlg != null){
 				dao.cartDeleteItem(idList.get((int)deleteFlg), session.get("login_user_id").toString());
 			}
-		return SUCCESS;
+
+			result = SUCCESS;
+		}else if(branch.equals("buy")){
+
+			int forCount = 0;
+
+			for(int i: idList) {
+
+				int totalPrice = (int)selectList.get(forCount) * (int)priceList.get(forCount);
+				dao.cartUpdateItem(i,totalPrice,(int)selectList.get(forCount), session.get("login_user_id").toString());
+
+				forCount++;
+
+				result = ERROR;
+			}
+
+
+		}
+		return result;
 	}
 
 

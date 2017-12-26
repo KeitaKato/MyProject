@@ -107,7 +107,14 @@
             <table border=1 id="item_table" style="table-layout:fixed;">
 			     <tr>
 			     	<td id="plus_itme">
-           				<s:iterator value="cartItemList">
+			     		<h1>購入情報</h1>
+			     		氏　　名:<s:property value="name" /><br>
+						郵便番号:<s:property value="postal" /><br>
+						都道府県:<s:property value="pref" /><br>
+						市区町村:<s:property value="city" /><br>
+						部屋番号:<s:property value="room" /><br>
+						電話番号:<s:property value="number" /><br>
+           				<s:iterator value="regiItemList">
            					<div id="item_info">
 			     				<p class="img">
                         			<img src='<s:property value="itemImg"/>'>
@@ -127,9 +134,7 @@
             			</s:iterator>
                     </td>
                     <td>
-						<b><span>カート内の小計 </span></b><b><s:property value="totalPrice" /> <span>円</span> </b>
-						<a href='<s:url action ="CartEditItemAction" ></s:url>' id="cart_link">カートの編集</a>
-						<a href='<s:url action ="RegiItemAction" ></s:url>'>レジに進む</a>
+						<a href='<s:url action="GoHomeAction"></s:url>'>homeに戻る。</a>
                     </td>
                  </tr>
            </table>

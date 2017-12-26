@@ -6,25 +6,43 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ecsite.dao.CartEditItemDAO;
-import com.internousdev.ecsite.dto.ItemDTO;
+import com.internousdev.ecsite.dao.AddressDAO;
+import com.internousdev.ecsite.dao.RegiCompleteItemDAO;
+import com.internousdev.ecsite.dto.AddressDTO;
+import com.internousdev.ecsite.dto.RegiDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegiItemAction extends ActionSupport implements SessionAware{
 
 	private int total_price = 0;
 
-	CartEditItemDAO cartEditItemDAO = new CartEditItemDAO();
+	RegiCompleteItemDAO regiCompleteItemDAO = new RegiCompleteItemDAO();
 
 	public Map<String, Object> session;
 
-	public List<ItemDTO> cartItemList = new ArrayList<>();
+	public List<RegiDTO> regiItemList = new ArrayList<>();
 
 	public List<Integer> selectList = new ArrayList<>();
 
 	public List<Integer> idList = new ArrayList<>();
 
 	public List<Integer> priceList = new ArrayList<>();
+
+	public AddressDAO dao = new AddressDAO();
+
+	public AddressDTO dto = new AddressDTO();
+
+	private String name;
+
+	private String postal;
+
+	private int pref;
+
+	private String city;
+
+	private String room;
+
+	private String number;
 
 	private String branch;
 
@@ -38,9 +56,18 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 			result = ERROR;
 		}else{
 
-			cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
+			dto = dao.selectAddressInfoDAO(session.get("login_user_id").toString());
 
-			total_price = cartEditItemDAO.getTotal_price();
+			this.name = dto.getName();
+			this.postal = dto.getPostal();
+			this.pref = dto.getPref();
+			this.city = dto.getCity();
+			this.room = dto.getRoom();
+			this.number = dto.getNumber();
+
+			regiItemList = regiCompleteItemDAO.getregiComplteItemDAOinfo(session.get("login_user_id").toString());
+
+			total_price = regiCompleteItemDAO.getTotal_price();
 		}
 
 		return result;
@@ -101,11 +128,59 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 		this.branch = branch;
 	}
 
-	public List<ItemDTO> getCartItemList(){
-		return cartItemList;
+	public List<RegiDTO> getCartItemList(){
+		return regiItemList;
 	}
 
-	public void setCartItemList(List<ItemDTO> cartItemList){
-		this.cartItemList = cartItemList;
+	public void setCartItemList(List<RegiDTO> cartItemList){
+		this.regiItemList = cartItemList;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPostal() {
+		return postal;
+	}
+
+	public void setPostal(String postal) {
+		this.postal = postal;
+	}
+
+	public int getPref() {
+		return pref;
+	}
+
+	public void setPref(int pref) {
+		this.pref = pref;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+
+	public void setRoom(String room) {
+		this.room = room;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 }

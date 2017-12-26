@@ -29,10 +29,10 @@
 		    <b><s:property value="errorMessage"/></b>
 			<s:form action="AddressCompleteAction" >
 				氏名<br>
-				<input type="text" name="name" value="名前を入力"/>
+				<input type="text" name="name" value='<s:property value="name" />'/>
 				<br>
 				郵便番号<br>
-				<input type="text" name="postal" value="郵便番号"/>
+				<input type="text" name="postal" value='<s:property value="postal" />'/>
 				<br>
 				都道府県<br>
 				<select name="pref" class="pref">
@@ -103,13 +103,13 @@
 				</select>
 				<br>
 				住所<br>
-				<input type="text" name="city" value="市区町村"/>
+				<input type="text" name="city" value='<s:property value="city" />'/>
 				<br>
 				アパート・マンション名<br>
-				<input type="text" name="room" value="アパート・マンション"/>
+				<input type="text" name="room" value='<s:property value="room" />'/>
 				<br>
 				電話番号<br>
-				<input type="text" name="number"/>
+				<input type="text" name="number" value='<s:property value="number" />'/>
 				<br>
 				<s:submit value="送信"/>
 			</s:form>

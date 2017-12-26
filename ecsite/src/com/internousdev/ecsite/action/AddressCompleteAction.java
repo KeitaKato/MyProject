@@ -44,15 +44,15 @@ public class AddressCompleteAction extends ActionSupport implements SessionAware
 
 
 		List<String> checkResult =new ArrayList<String>(Arrays.asList("氏名","郵便番号","都道府県","住所","アパート名・マンション名","電話番号"));
-		if(name != null ){
+		if(name.length() != 0){
 			name = Normalizer.normalize(name, Normalizer.Form.NFKC);
 			checkResult.set(0, "success");
 		}
-		if(postal != null){
+		if(postal.length() != 0){
 			postal = Normalizer.normalize(postal, Normalizer.Form.NFKC);
 			if(postal.matches("^[0-9]{7}$") == true){
 				StringBuffer postalBfr = new StringBuffer(postal);
-				postalBfr.insert(4, "-");
+				postalBfr.insert(3, "-");
 				postal = postalBfr.toString();
 				checkResult.set(1, "success");
 			}else if(postal.matches("^[0-9]{3}-[0-9]{4}$") == true){
@@ -64,15 +64,15 @@ public class AddressCompleteAction extends ActionSupport implements SessionAware
 		if(pref != 0){
 			checkResult.set(2, "success");
 		}
-		if(city != null){
+		if(city.length() != 0){
 			city = Normalizer.normalize(city, Normalizer.Form.NFKC);
 			checkResult.set(3, "success");
 		}
-		if(room != null){
+		if(room.length() != 0){
 			room = Normalizer.normalize(room, Normalizer.Form.NFKC);
 			checkResult.set(4, "success");
 		}
-		if(number != null){
+		if(number.length() != 0){
 			number = Normalizer.normalize(number, Normalizer.Form.NFKC);
 			if(number.matches("^[0-9]{11}$") == true){
 				StringBuffer numberBfr = new StringBuffer(number);

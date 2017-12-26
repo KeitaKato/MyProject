@@ -73,6 +73,12 @@
 }
 
 	</style>
+	<script type="text/javascript">
+	function onAction(){
+		document.getElemenById("account_menu").action = 'MyPageAction';
+		document.getElemenById("account_menu").submit();
+	}
+	</script>
 </head>
 <body>
     <div id="header">
@@ -96,7 +102,7 @@
 
             	<div  id="header_list">
                     <div id="account_menu" class="list-group">
-                        <a href="#" class="list-group-item">こんにちは、
+                        <a href='<s:url action="MyPageAction"></s:url>' class="list-group-item">こんにちは、
                         <s:if test="session.login_user_id != null">
                             <br><b><s:property value="session.userName"/></b>
                         </s:if>

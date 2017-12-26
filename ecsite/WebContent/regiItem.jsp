@@ -12,6 +12,8 @@
     <style type=text/css>
         /* ===========ITEMLIST========== */
 #top{
+	text-align: left;
+	padding: 10px;
 }
 #item_list{
 	width: 90%;
@@ -111,7 +113,19 @@
 </head>
 <body>
 <div id="top">
-	<h1>ショッピングカート</h1>
+	<h3>送り先住所</h3>
+	<s:if test='name != null'>
+		氏　　名:<s:property value="name" /><br>
+		郵便番号:<s:property value="postal" /><br>
+		都道府県:<s:property value="pref" /><br>
+		市区町村:<s:property value="city" /><br>
+		部屋番号:<s:property value="room" /><br>
+		電話番号:<s:property value="number" /><br>
+		<a href='<s:url action="AddressAction"></s:url>'>住所変更</a>
+	</s:if>
+	<s:else>
+		<a href='<s:url action="AddressAction"></s:url>'>住所登録</a>
+	</s:else>
 </div>
 <div id="main">
 	<div id="main-center">
@@ -168,7 +182,7 @@
 	       </div>
 	       <div id="cart_main">
 	       	   <b><span>小計 ( 点): </span><s:property value="total_price" /><span>円</span></b><br>
-               <s:submit type="button" name="branch" value="regi" form="itemForm">レジに進む</s:submit>
+               <s:submit type="button" name="branch" value="buy" form="itemForm">購入確定</s:submit>
 	       </div>
 	       <div id="cart_bottom">
 
