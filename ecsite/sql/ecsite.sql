@@ -61,7 +61,7 @@ insert_date datetime,
 update_date datetime
 );
 
-INSERT INTO user_address_transaction(id int not null primary key auto_increment,user_master_id,user_name,postal_code,prefectures_code,city,room,phone_number) VALUES
+INSERT INTO user_address_transaction(user_name,postal_code,prefectures_code,city,room,phone_number) VALUES
 ("インターノ太郎","000-0000",24,"○○県○○市○○○0-0-00","○○マンション○○○号室","000-0000-0000");
 INSERT INTO item_info_transaction(item_name, item_price, item_category, item_img, item_stock) VALUES
 ("トマト",100,'青果',"./picture/itemImg/fd400590.jpg",50),

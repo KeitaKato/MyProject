@@ -7,20 +7,20 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ecsite.dao.AddressDAO;
-import com.internousdev.ecsite.dao.RegiCompleteItemDAO;
+import com.internousdev.ecsite.dao.CartEditItemDAO;
 import com.internousdev.ecsite.dto.AddressDTO;
-import com.internousdev.ecsite.dto.RegiDTO;
+import com.internousdev.ecsite.dto.ItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegiItemAction extends ActionSupport implements SessionAware{
 
 	private int total_price = 0;
 
-	RegiCompleteItemDAO regiCompleteItemDAO = new RegiCompleteItemDAO();
+	CartEditItemDAO cartEditItemDAO = new CartEditItemDAO();
 
 	public Map<String, Object> session;
 
-	public List<RegiDTO> regiItemList = new ArrayList<>();
+	public List<ItemDTO> cartItemList = new ArrayList<>();
 
 	public List<Integer> selectList = new ArrayList<>();
 
@@ -65,9 +65,9 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 			this.room = dto.getRoom();
 			this.number = dto.getNumber();
 
-			regiItemList = regiCompleteItemDAO.getregiComplteItemDAOinfo(session.get("login_user_id").toString());
+			cartItemList = cartEditItemDAO.getCartEditItemDAOinfo(session.get("login_user_id").toString());
 
-			total_price = regiCompleteItemDAO.getTotal_price();
+			total_price = cartEditItemDAO.getTotal_price();
 		}
 
 		return result;
@@ -128,12 +128,12 @@ public class RegiItemAction extends ActionSupport implements SessionAware{
 		this.branch = branch;
 	}
 
-	public List<RegiDTO> getCartItemList(){
-		return regiItemList;
+	public List<ItemDTO> getCartItemList(){
+		return cartItemList;
 	}
 
-	public void setCartItemList(List<RegiDTO> cartItemList){
-		this.regiItemList = cartItemList;
+	public void setCartItemList(List<ItemDTO> cartItemList){
+		this.cartItemList = cartItemList;
 	}
 
 	public String getName() {
