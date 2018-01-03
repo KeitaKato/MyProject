@@ -129,4 +129,21 @@
 
 
 	</package>
+
+	<!-- jsonレスポンスを返すアクションを定義 -->
+	<package name="example" extends="json-default" namespace="/">
+		<!-- レスポンスの種別にjsonを追加する -->
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+
+		<!-- アクション定義 -->
+		<action name="PythonGraphAction"
+			class="com.internousdev.ecsite.action.PythonGraphAction">
+			<!-- jsonを返す。目的に応じてparamには色々ある模様 -->
+			<result type="json">
+				<param name="root">graphImg</param>
+			</result>
+		</action>
+	</package>
 </struts>

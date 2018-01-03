@@ -88,7 +88,7 @@
 	 		    </a>
 
             </div>
-            <s:form action="SearchAction">
+            <s:form action="SearchAction" theme="simple">
             	<div id="sample">
             			<input type="text" name="searchValue" class="text" placeholder="商品検索">
             			<s:submit class="btn" type="button" value="検索">

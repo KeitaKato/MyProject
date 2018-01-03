@@ -13,5 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="libs/msgpack-rpc-0.7.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/msgpack-0.6.6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
